@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+
+</head>
+
+<body>
+    <div class="box">
+        <div id="title"><span id="city"></span>电商综合发展</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+
+            <p id="samllTitle">八、<span id="year"></span>县区企业B2C销量量变化趋势</p>
+            <p style="font-size:13px;">
+                <span style="margin-right: 20px"><span id="place1"></span>销量总数: <span id="money1"></span>万件 </span>
+                <span style="margin-right: 20px"><span id="place2"></span>销量总数: <span id="money2"></span>万件 </span>
+                <span style="margin-right: 20px"><span id="place3"></span>销量总数: <span id="money3"></span>万件 </span>
+                <span><span id="place4"></span>销量总数: <span id="money4"></span>万件 </span>
+            </p>
+            <p style="font-size:13px;">
+                <span style="margin-right: 20px"><span id="place5"></span>销量总数: <span id="money5"></span>万件 </span>
+                <span style="margin-right: 20px"><span id="place6"></span>销量总数: <span id="money6"></span>万件 </span>
+                <span style="margin-right: 20px"><span id="place7"></span>销量总数: <span id="money7"></span>万件 </span>
+                <span><span id="place8"></span>销量总数: <span id="money8"></span>万件 </span>
+            </p>
+            <p style="font-size:13px;">
+                <span style="margin-right: 20px"><span id="place9"></span>销量总数: <span id="money9"></span>万件 </span>
+                <span style="margin-right: 20px"><span id="place10"></span>销量总数: <span id="money10"></span>万件 </span>
+                <span><span id="place11"></span>销量总数: <span id="money11"></span>万件 </span>
+            </p>
+            <div id="chart1" style=" height:130px; width:400px;margin: 0px auto;padding-left: 40px;"></div>
+            <div id="chart" style=" height:420px; width:950px;margin: -100px auto; margin-left: -10px"></div>
+
+            <div id="line"></div>
+            <div id="summary"></div>
+            <div class="page-even">
+                <span>8</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var city, year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/8.php",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                city = data.city;
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#city').html(city);
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        $('#place1').html(keys[0]);
+        $('#money1').html(values[0]);
+        $('#place2').html(keys[1]);
+        $('#money2').html(values[1]);
+        $('#place3').html(keys[2]);
+        $('#money3').html(values[2]);
+        $('#place4').html(keys[3]);
+        $('#money4').html(values[3]);
+        $('#place5').html(keys[4]);
+        $('#money5').html(values[4]);
+        $('#place6').html(keys[5]);
+        $('#money6').html(values[5]);
+        $('#place7').html(keys[6]);
+        $('#money7').html(values[6]);
+        $('#place8').html(keys[7]);
+        $('#money8').html(values[7]);
+        $('#place9').html(keys[8]);
+        $('#money9').html(values[8]);
+        $('#place10').html(keys[9]);
+        $('#money10').html(values[9]);
+        $('#place11').html(keys[10]);
+        $('#money11').html(values[10]);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        myChart.setOption({
+            title: {
+                text: '',
+                x: '34%',
+                y: '18'
+            },
+            grid: {
+                top: '8%',
+                left: '3%',
+                right: '10%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                name: '地区',
+                splitLine: {
+                    show: false
+                },
+                data: keys,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 10,
+                        align: 'center',
+                        fontWeight: '500',
+                        fontFamily: '宋体'
+                    }
+                },
+            },
+            yAxis: {
+                type: 'value',
+                show: true,
+                name: '销量总量（万件）',
+            },
+            series: [{
+                type: 'bar',
+                stack: '总量',
+                barWidth: 55,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+                data: [{
+                    value: values[0],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[1],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[2],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[3],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[4],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[5],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[6],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[7],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[8],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[9],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }, {
+                    value: values[10],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                        }
+                    }
+                }]
+            }]
+        })
+    </script>
+</body>
+
+</html>

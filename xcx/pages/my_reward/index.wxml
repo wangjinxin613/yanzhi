@@ -1,0 +1,89 @@
+<view class="nav">
+     <view class="single {{isSelect1}}" bindtap="change_index">
+          <text class="text">我收到的</text>
+     </view>
+     <view class="single {{isSelect2}}" bindtap="change_vip">
+          <text class="text">我发出的</text>
+     </view>
+</view>
+<view class="{{isDisplay1}}">
+     <view class="one_head">
+          <view class="leiji">
+               累计收到赞赏
+          </view>
+          <view class="text_left border">
+               <text class="big">{{userInfo.lj_money}}</text>
+               <view class="little">金额(元)</view>
+          </view>
+          <view class="text_left">
+               <text class="big">{{userInfo.lj_ci}}</text>
+               <view class="little">次数</view>
+          </view>
+          <view class="clear"></view>
+     </view>
+     <view class="one_list" wx:for="{{my_data}}" wx:key="key">
+          <image src="{{item.avatarUrl}}" class="headimg"></image>
+          <view class="list_middle" >
+               <view class="one_line">
+                    <text class="color">{{item.nickName}}</text>查看了你的照片
+               </view>
+               <view class="one_line">
+                    赞赏
+                    <text class="color">￥ {{item.money}}</text>
+               </view>
+               <view class="one_line">
+                    {{item.time}}
+               </view>
+          </view>
+          <image src="{{item.rewardImg}}" class="fengmian" mode="aspectFill"></image>
+     </view>
+   
+</view>
+<view class="{{isDisplay2}}">
+    <view class="index" wx:for="{{data_list}}" wx:key="key" wx:for-index="idx">
+          <view class="list">
+               <view class="list_head">
+                    <image src="{{item.avatarUrl}}" class="headimg" />
+                    <text class="list_head_text">{{item.nickName}}</text>
+               </view>
+               <view class="list_hr"></view>
+               <view class="list_body">
+                  {{item.beizhu}}
+               </view>
+               <view class="clear"></view>
+               <view class="list_body_img">
+                    <image src="{{item.imgUrl[0]}}" class="list_img" mode="aspectFill"/>
+                    <view class="right_img" bindtap='reward' data-lid='{{item.id}}' data-id='{{idx}}' data-src="{{item.imgUrl[0]}}" data-isReward="{{item.isReward}}">
+                         <view class="suo"  wx:if="{{item.isReward == 0}}">
+                              <image src="/images/suo.png" class="suo_img" />
+                         </view>
+                         <view class="suo_text" wx:if="{{item.isReward == 0}}" style="text-align:center;">
+						<text encode="{{true}}" >更多{{item.imgUrl.length-2}}张已被锁定
+						点击打赏后可查看</text>
+						
+                         </view>
+					  <view class="suo_text" wx:else style="text-align:center;margin-top:55px;">
+					  <text encode="{{true}}" >更多{{item.imgUrl.length-2}}张已经解锁
+						点击查看</text>
+					  </view>
+                         <image src="{{item.imgUrl[1]}}" class=" active" mode="aspectFill"/>
+                    </view>
+                    <view class="clear"></view>
+               </view>
+               <!-- 头像打赏 -->
+			<block wx:if="{{item.rewardNumber > 0}}">
+               <view class="list_foot">
+				<block wx:for="{{item.rewarderImg}}" wx:key="key">
+                    	<image src="{{item}}" class="dashang_img" />
+				</block>
+                    <text class="list_foot_text">{{item.rewarderName}} 等{{item.rewardNumber}}人已打赏</text>
+               </view>
+			</block>
+			<block wx:else>
+			 	<view class="list_foot">
+				 	<text class="list_foot_text">还没有人打赏</text>
+				 </view>
+			</block>
+          </view>
+	</view>
+</view>

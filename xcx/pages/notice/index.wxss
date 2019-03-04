@@ -1,0 +1,21 @@
+/**index.wxss**/
+page{
+	background-color:#eee;
+	font-size: 14px;
+	color:#2e2e2e;
+
+}
+.head{
+	background: #383152;
+	padding:15px 0 15px 15px;
+	color: #fff;
+	font-size: 12px;
+}
+.option{
+	background: #fff;
+	padding:12px 15px;
+}
+radio{
+	float: right;
+	margin-top:-2px;
+}

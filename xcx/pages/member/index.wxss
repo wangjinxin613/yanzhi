@@ -1,0 +1,49 @@
+/**index.wxss**/
+page{
+	background-color:#fff;
+}
+.member{
+	text-align: center;
+	padding: 40px 0 40px 0;
+}
+.member image{
+	width: 60px;
+	height: 60px;
+	border-radius: 100px;
+}
+.nickname{
+	color:#dd328f;
+	font-size: 15px;
+	margin-top:12px;
+	font-weight: 600;
+}
+.userid{
+	margin-top:5px;
+	font-size: 12px;
+	color:#2e2e2e;
+}
+.member_list{
+	width: 90%;
+	color:#2e2e2e;
+	margin-left:5%;
+	font-size: 14px;
+}
+.member_list .single{
+	height: 30px;
+	line-height: 30px;
+	
+	margin-top: 20px;
+}
+.member_list image{
+	width:25px;
+	height: 25px;
+	vertical-align: middle;
+	margin-top:-3px;
+}
+.member_list .right{
+	float: right;
+	width: 10px;
+	height: 10px;
+	vertical-align: text-bottom;
+	margin-top:10px;
+}

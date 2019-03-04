@@ -1,0 +1,55 @@
+/**my_send.wxss**/
+page{
+	background-color:#eee;
+	font-size: 14px;
+	margin-top:-4px;
+}
+.list{
+	background: #fff;
+	padding:10px 10px;
+	margin-top:4px;
+}
+.list .first{
+	color:#dd328f;
+	font-size: 16px;
+	padding-bottom: 6px;
+	font-weight: 800;
+}
+.list .body{
+	padding-bottom: 2px;
+}	
+.list .tuijian{
+	float: right;
+	background:#dd328f;
+	color: #fff;
+	font-size: 9px;
+	margin-top:-1px;
+	padding: 3px 8px;
+	font-weight: 400;
+	border-radius: 10px;
+}
+.list .list_img{
+	margin-left:-10px;
+}
+.list .list_img image{
+	width:30%;
+	margin-top: 5px;
+	height: 200rpx;
+	margin-left:3.3%;
+}
+.right{
+	float: right;
+	font-size:12px;
+	padding:0;
+	border:0;
+	background: #fff;
+}
+.foot{
+font-size:13px; 
+margin-top:6px;
+}
+.right_img{
+	float: right;
+	width: 20px;
+	height: 20px;
+}

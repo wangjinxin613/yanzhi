@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts-all.js"></script>
+    <script src="js/shanxi.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">各市电商综合发展</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（二十二）<span id="year"></span>各市电商综合发展-农产品销售排名</p>
+            <p style="position:absolute;top:120px;margin-left:5%;">单位：亿元</p>
+            <div id="chart1" style="position:absolute;height:300px;width:400px;right:70px;"></div>
+            <div id="chart2" style="height:500px;width:920px;margin-left:-30px;"></div>
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+
+        <div class="page-even">
+            <span>22</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/22.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        var maxvalue = values[0];
+        for (var i = 1; i < values.length; i++) {
+            if (maxvalue < values[i]) {
+                maxvalue = values[i]
+            };
+        }
+
+        //更新DOM
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            title: {
+
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    var value = (params.value + '').split('.');
+                    value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,') + '.' + value[1];
+                    return params.seriesName + '<br/>' + params.name + ' : ' + value;
+                }
+            },
+            dataRange: {
+                x: '22%',
+                min: 0,
+                max: maxvalue,
+                text: ['高', '低'],
+                realtime: false,
+                calculable: false,
+                color: ['#0168B7', '#118CCF', '#C4E1FF']
+            },
+            series: [{
+                name: 'World Population (2010)',
+                type: 'map',
+                mapType: '江苏',
+                roam: true,
+                mapLocation: {
+                    y: 60
+                },
+                itemStyle: {
+                    normal: {
+                        borderWidth: 0.5,
+                        borderColor: "#9e9e9e",
+                    },
+                    emphasis: {
+                        label: {
+                            show: true
+                        }
+                    }
+                },
+                data: [{
+                    name: keys[0],
+                    value: values[0]
+                }, {
+                    name: keys[1],
+                    value: values[1]
+                }, {
+                    name: keys[2],
+                    value: values[2]
+                }, {
+                    name: keys[3],
+                    value: values[3]
+                }, {
+                    name: keys[4],
+                    value: values[4]
+                }, {
+                    name: keys[5],
+                    value: values[5]
+                }, {
+                    name: keys[6],
+                    value: values[6]
+                }, {
+                    name: keys[7],
+                    value: values[7]
+                }, {
+                    name: keys[8],
+                    value: values[8]
+                }, {
+                    name: keys[9],
+                    value: values[9]
+                }, {
+                    name: keys[10],
+                    value: values[10]
+                }, {
+                    name: keys[11],
+                    value: values[11]
+                }, {
+                    name: keys[12],
+                    value: values[12]
+                }]
+            }]
+        })
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+
+        // 指定图表的配置项和数据
+        myChart2.setOption({
+            title: {
+                x: 'center',
+            },
+            tooltip: {
+                trigger: 'item'
+            },
+            calculable: true,
+            grid: {
+                borderWidth: 0,
+                y: 80,
+                y2: 60
+            },
+            xAxis: [{
+                type: 'category',
+                show: true,
+                splitLine: {　　　　
+                    show: false　　
+                },
+                data: keys,
+            }],
+            yAxis: [{
+                type: 'value',
+                show: false,
+            }],
+            series: [{
+                name: '交易额',
+                type: 'bar',
+                barWidth: 35,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                                '#0277BD', '#0277BD', '#0277BD',
+                                '#0277BD', '#0277BD', '#0277BD',
+                                '#0277BD', '#0277BD', '#0277BD',
+                                '#0277BD', '#0277BD', '#0277BD',
+                                '#0277BD', '#0277BD', '#0277BD',
+                                '#0277BD', '#0277BD', '#0277BD',
+                                '#0277BD'
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        label: {
+                            show: true,
+                            position: 'top',
+                        }
+                    }
+                },
+                //从小到大依次输入数据
+                data: values,
+            }]
+        })
+    </script>
+</body>
+
+</html>

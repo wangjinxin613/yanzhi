@@ -1,0 +1,111 @@
+<swiper indicator-dots="true" indicator-color="#fff" indicator-active-color="#EE3B3B" autoplay="true" interval="3000" duration="500" circular="true" class="banner swiper-box">
+     <block wx:for="{{imgUrls}}" wx:key="unique" class="swiper-box">
+          <swiper-item>
+			<navigator url="{{item.web_url}}" open-type="navigate" hover-class="none">
+               <image src="{{item.url}}" class="slide-image" class="banner" />
+			</navigator>
+          </swiper-item>
+     </block>
+</swiper>
+<!-- 俩个选项 -->
+<view class="nav">
+     <view class="single {{isSelect1}}" bindtap="change_index">
+          <image src="/images/tuijian.png" class="image" />
+          <text class="text">推荐</text>
+     </view>
+     <view class="single {{isSelect2}}" bindtap="change_vip">
+          <image src="/images/huiyuan.png" class="image"/>
+          <text class="text">会员</text>
+     </view>
+</view>
+<!-- 会员页面 -->
+<view class="vip {{isDisplay2}}">
+     <image src="/images/vip.png" />
+     <view class="vip_text">为了能够为大家提供更好的内容与服务，会员功能目前正在积极打造中，敬请期待 关注微信公众号-“颜值物语”即可获取最新进度
+     </view>
+</view>
+<!--赏图列表 -->
+<view class="index {{isDisplay1}}" wx:for="{{data_list}}" wx:key="key" wx:for-index="idx">
+          <view class="list">
+               <view class="list_head">
+                    <image src="{{item.avatarUrl}}" class="headimg" />
+                    <text class="list_head_text">{{item.nickName}}</text>
+               </view>
+               <view class="list_hr"></view>
+               <view class="list_body">
+                  {{item.beizhu}}
+               </view>
+               <view class="clear"></view>
+               <view class="list_body_img">
+                    <image src="{{item.imgUrl[0]}}" class="list_img" mode="aspectFill"  bindtap='shoutu' data-src="{{item.imgUrl[0]}}"/>
+                    <view class="right_img" bindtap='reward' data-lid='{{item.id}}' data-id='{{idx}}' data-src="{{item.imgUrl[0]}}" data-isReward="{{item.isReward}}">
+                         <view class="suo"  wx:if="{{item.isReward == 0}}">
+                              <image src="/images/suo.png" class="suo_img" />
+                         </view>
+                         <view class="suo_text" wx:if="{{item.isReward == 0}}" style="text-align:center;">
+						<text encode="{{true}}" >更多{{item.imgUrl.length-1}}张已被锁定
+						点击打赏后可查看</text>
+						
+                         </view>
+					  <view class="suo_text" wx:else style="text-align:center;margin-top:55px;">
+					  <text encode="{{true}}" >更多{{item.imgUrl.length-1}}张已经解锁
+						点击查看</text>
+					  </view>
+                         <image src="{{item.imgUrl[1]}}" class=" active" mode="aspectFill"/>
+                    </view>
+                    <view class="clear"></view>
+               </view>
+               <!-- 头像打赏 -->
+			<block wx:if="{{item.rewardNumber > 0}}">
+               <view class="list_foot">
+				<block wx:for="{{item.rewarderImg}}" wx:key="key">
+                    	<image src="{{item}}" class="dashang_img" />
+				</block>
+                    <text class="list_foot_text">{{item.rewarderName}} 等{{item.rewardNumber}}人已打赏</text>
+               </view>
+			</block>
+			<block wx:else>
+			 	<view class="list_foot">
+				 	<text class="list_foot_text">还没有人打赏</text>
+				 </view>
+			</block>
+          </view>
+    
+	<!--
+	 <navigator url="/pages/reward/index" open-type="navigate" hover-class="none">
+          <view class="list">
+               <view class="list_head">
+                    <image src="/images/headimg.jpg" class="headimg" />
+                    <text class="list_head_text">基尔加丹</text>
+               </view>
+               <view class="list_hr"></view>
+               <view class="list_body">
+                    据悉，该片只剩两周就杀青，导演辛格被曝感恩节后好几天未 现身片场，此前也多次消失，且与主演拉米·马雷克发生了矛 盾。
+               </view>
+               <view class="clear"></view>
+               <view class="list_body_img">
+                    <image src="/images/list_img1.jpg" class="list_img" />
+                    <view class="right_img">
+                         <view class="suo">
+                              <image src="/images/suo.png" class="suo_img" />
+                         </view>
+                         <view class="suo_text">
+						<text encode="{{true}}">更多2张已被锁定
+						点击打赏后可查看</text>
+                         </view>
+                         <image src="/images/list_img2.jpg" class=" active" />
+                    </view>
+                    <view class="clear"></view>
+               </view>
+              
+               <view class="list_foot">
+                    <image src="/images/headimg.jpg" class="dashang_img" />
+                    <image src="/images/headimg.jpg" class="dashang_img" />
+                    <image src="/images/headimg.jpg" class="dashang_img" />
+                    <image src="/images/headimg.jpg" class="dashang_img" />
+                    <text class="list_foot_text">记得要微笑 等18人已打赏</text>
+               </view>
+          </view>
+     </navigator>
+	-->
+</view>

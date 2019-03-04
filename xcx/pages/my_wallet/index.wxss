@@ -1,0 +1,54 @@
+/**index.wxss**/
+page{
+	background-color:#fff;
+	font-size: 14px;
+	color:#2e2e2e;
+}
+.head{
+	text-align: center;
+	padding:40px 0 20px 0;
+}
+.head image{
+	text-align: center;
+	width:60px;
+}
+
+.tixian{
+	font-size: 13px;
+	margin-top: 35px;
+
+}
+.tixian label{
+	float: left;
+	margin-top:5px;
+	margin-left:110rpx;
+}
+.tixian_input{
+	float: left;
+	width: 350rpx;
+	margin-left:10px;
+	background:#e4e4e4;
+	padding:3px 0 3px 5px;
+	border-radius: 4px;
+}
+.clear{
+	clear: both;
+}
+.btn{
+	margin-top:30px;
+
+}
+button{
+	font-size: 16px;
+	background:#dd328f;
+	color: #fff;
+	width:60%;
+	border-radius: 50px;
+}
+.tip{
+	font-size: 11px;
+	margin-top:15px;
+	width: 64%;
+	text-align: left;
+	margin-left:19%;
+}

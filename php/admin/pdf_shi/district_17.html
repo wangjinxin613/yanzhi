@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+
+    <div class="box">
+        <div id="title"><span id="city"></span>单品数据分析</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">十七、<span id="city2"></span>单品TOP</p>
+
+            <div id="chart1" style=" margin:-20px auto;  width:800px; ">
+                <table class="table table-striped" style="margin-top: 65px">
+                    <thead>
+                        <tr>
+                            <th>单品名称</th>
+                            <th>所属店铺</th>
+                            <th>交易额（万元）</th>
+                            <th>交易量（件）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="name1"></td>
+                            <td id="shop1"></td>
+                            <td id="sale_money1"></td>
+                            <td id="sale_num1"></td>
+                        </tr>
+                        <tr>
+                            <td id="name2"></td>
+                            <td id="shop2"></td>
+                            <td id="sale_money2"></td>
+                            <td id="sale_num2"></td>
+                        </tr>
+                        <tr>
+                            <td id="name3"></td>
+                            <td id="shop3"></td>
+                            <td id="sale_money3"></td>
+                            <td id="sale_num3"></td>
+                        </tr>
+                        <tr>
+                            <td id="name4"></td>
+                            <td id="shop4"></td>
+                            <td id="sale_money4"></td>
+                            <td id="sale_num4"></td>
+                        </tr>
+                        <tr>
+                            <td id="name5"></td>
+                            <td id="shop5"></td>
+                            <td id="sale_money5"></td>
+                            <td id="sale_num5"></td>
+                        </tr>
+                        <tr>
+                            <td id="name6"></td>
+                            <td id="shop6"></td>
+                            <td id="sale_money6"></td>
+                            <td id="sale_num6"></td>
+                        </tr>
+                        <tr>
+                            <td id="name7"></td>
+                            <td id="shop7"></td>
+                            <td id="sale_money7"></td>
+                            <td id="sale_num7"></td>
+                        </tr>
+                        <tr>
+                            <td id="name8"></td>
+                            <td id="shop8"></td>
+                            <td id="sale_money8"></td>
+                            <td id="sale_num8"></td>
+                        </tr>
+                        <tr>
+                            <td id="name9"></td>
+                            <td id="shop9"></td>
+                            <td id="sale_money9"></td>
+                            <td id="sale_num9"></td>
+                        </tr>
+                        <tr>
+                            <td id="name10"></td>
+                            <td id="shop10"></td>
+                            <td id="sale_money10"></td>
+                            <td id="sale_num10"></td>
+                        </tr>
+                        <tr>
+                            <td id="name11"></td>
+                            <td id="shop11"></td>
+                            <td id="sale_money11"></td>
+                            <td id="sale_num11"></td>
+                        </tr>
+                        <tr>
+                            <td id="name12"></td>
+                            <td id="shop12"></td>
+                            <td id="sale_money12"></td>
+                            <td id="sale_num12"></td>
+                        </tr>
+                        <tr>
+                            <td id="name13"></td>
+                            <td id="shop13"></td>
+                            <td id="sale_money13"></td>
+                            <td id="sale_num13"></td>
+                        </tr>
+                        <tr>
+                            <td id="name14"></td>
+                            <td id="shop14"></td>
+                            <td id="sale_money14"></td>
+                            <td id="sale_num14"></td>
+                        </tr>
+                        <tr>
+                            <td id="name15"></td>
+                            <td id="shop15"></td>
+                            <td id="sale_money15"></td>
+                            <td id="sale_num15"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="line"></div>
+        <div id="summary"></div>
+        <div class="page-odd">
+            <span>17</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var city, year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/17.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                city = data.city;
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        //更新DOM
+        $('#city').html(city);
+        $('#city2').html(city);
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        $('#name1').html(datavalue[0]["name"]);
+        $('#shop1').html(datavalue[0]["shop"]);
+        $('#sale_money1').html(datavalue[0]["sale_money"]);
+        $('#sale_num1').html(datavalue[0]["sale_num"]);
+
+        $('#name2').html(datavalue[1]["name"]);
+        $('#shop2').html(datavalue[1]["shop"]);
+        $('#sale_money2').html(datavalue[1]["sale_money"]);
+        $('#sale_num2').html(datavalue[1]["sale_num"]);
+
+        $('#name3').html(datavalue[2]["name"]);
+        $('#shop3').html(datavalue[2]["shop"]);
+        $('#sale_money3').html(datavalue[2]["sale_money"]);
+        $('#sale_num3').html(datavalue[2]["sale_num"]);
+
+        $('#name4').html(datavalue[3]["name"]);
+        $('#shop4').html(datavalue[3]["shop"]);
+        $('#sale_money4').html(datavalue[3]["sale_money"]);
+        $('#sale_num4').html(datavalue[3]["sale_num"]);
+
+        $('#name5').html(datavalue[4]["name"]);
+        $('#shop5').html(datavalue[4]["shop"]);
+        $('#sale_money5').html(datavalue[4]["sale_money"]);
+        $('#sale_num5').html(datavalue[4]["sale_num"]);
+
+        $('#name6').html(datavalue[5]["name"]);
+        $('#shop6').html(datavalue[5]["shop"]);
+        $('#sale_money6').html(datavalue[5]["sale_money"]);
+        $('#sale_num6').html(datavalue[5]["sale_num"]);
+
+        $('#name7').html(datavalue[6]["name"]);
+        $('#shop7').html(datavalue[6]["shop"]);
+        $('#sale_money7').html(datavalue[6]["sale_money"]);
+        $('#sale_num7').html(datavalue[6]["sale_num"]);
+
+        $('#name8').html(datavalue[7]["name"]);
+        $('#shop8').html(datavalue[7]["shop"]);
+        $('#sale_money8').html(datavalue[7]["sale_money"]);
+        $('#sale_num8').html(datavalue[7]["sale_num"]);
+
+        $('#name9').html(datavalue[8]["name"]);
+        $('#shop9').html(datavalue[8]["shop"]);
+        $('#sale_money9').html(datavalue[8]["sale_money"]);
+        $('#sale_num9').html(datavalue[8]["sale_num"]);
+
+        $('#name10').html(datavalue[9]["name"]);
+        $('#shop10').html(datavalue[9]["shop"]);
+        $('#sale_money10').html(datavalue[9]["sale_money"]);
+        $('#sale_num10').html(datavalue[9]["sale_num"]);
+
+        $('#name11').html(datavalue[10]["name"]);
+        $('#shop11').html(datavalue[10]["shop"]);
+        $('#sale_money11').html(datavalue[10]["sale_money"]);
+        $('#sale_num11').html(datavalue[10]["sale_num"]);
+
+        $('#name12').html(datavalue[11]["name"]);
+        $('#shop12').html(datavalue[11]["shop"]);
+        $('#sale_money12').html(datavalue[11]["sale_money"]);
+        $('#sale_num12').html(datavalue[11]["sale_num"]);
+
+        $('#name13').html(datavalue[12]["name"]);
+        $('#shop13').html(datavalue[12]["shop"]);
+        $('#sale_money13').html(datavalue[12]["sale_money"]);
+        $('#sale_num13').html(datavalue[12]["sale_num"]);
+
+        $('#name14').html(datavalue[13]["name"]);
+        $('#shop14').html(datavalue[13]["shop"]);
+        $('#sale_money14').html(datavalue[13]["sale_money"]);
+        $('#sale_num14').html(datavalue[13]["sale_num"]);
+
+        $('#name15').html(datavalue[14]["name"]);
+        $('#shop15').html(datavalue[14]["shop"]);
+        $('#sale_money15').html(datavalue[14]["sale_money"]);
+        $('#sale_num15').html(datavalue[14]["sale_num"]);
+    </script>
+</body>
+
+</html>

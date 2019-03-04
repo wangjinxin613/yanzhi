@@ -1,0 +1,24 @@
+<view class="head">
+     关注 "颜值物语" 微信公众号接受赞赏通知
+</view>
+<radio-group>
+<view class="option">
+	<text>全部推送</text>
+	<radio color="#dd328f" name="notice" checked="true" bindtap="post" data-notice="1" wx:if="{{userInfo.notice == 1}}"/>
+	<radio color="#dd328f" name="notice" bindtap="post" data-notice="1" wx:else/>
+	
+</view>
+<view class="option" style="margin-top:5px;">
+	<text>不推送</text>
+	<radio color="#dd328f" name="notice" checked="true" bindtap="post" data-notice="2"   wx:if="{{userInfo.notice == 2}}"/>
+	<radio color="#dd328f" name="notice" bindtap="post" data-notice="2"  wx:else/>
+</view>
+</radio-group>
+<!--
+<view style="font-size:12px;text-align:center;margin-top:80px;">
+长按扫码关注“颜值物语”公众号
+</view>
+<view style="text-align:center;margin-top:15px;	">
+<image src="/images/erweima.png" style="width:180px;height:180px;"></image>
+</view>
+-->

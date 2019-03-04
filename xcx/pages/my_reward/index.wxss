@@ -1,0 +1,123 @@
+/**index.wxss**/
+@import "../index/index.wxss";
+page{
+	background-color:#eee;
+	font-size: 14px;
+	color:#2e2e2e;
+}
+.nav{
+ 
+  background:#3c3889;
+  height:40px;
+  line-height: 40px;
+}
+.nav .image{
+  width:25px;
+  height: 25px;
+   line-height: 40px;
+   margin-top:-3px;
+   vertical-align:middle;
+}
+.nav .text{
+  
+  margin-left:8px;
+  color:#fff;
+
+}
+.nav .single{
+  width:50%;
+  float:left;
+  text-align: center;
+    height:40px;
+  line-height: 40x;
+}
+.nav .active{
+  background:#dd328f;
+}
+.hidden{
+  display: none;
+}
+.leiji{
+	font-size: 13px;
+	text-align: center;
+	padding:20px 0;
+}
+.text_left{
+	float: left;
+	width:49.6%;
+
+	text-align: center;
+}
+.border{
+		border-right: 1px solid #e4e4e4;
+}
+.text_left .big{
+	font-size: 22px;
+
+}
+.text_left .little{
+	font-size: 12px;
+	margin-top: 10px;
+}
+.one_head{
+	background: #fff;
+	padding-bottom: 20px;
+}
+.clear{
+	clear:both;
+}
+.one_list{
+	font-size: 12px;
+	background: #fff;
+	padding:5px 10px;
+	margin-top:6px;
+	height: 55px;
+}
+.one_list .headimg{
+	width:55px;
+	height: 55px;
+	border-radius: 100px;
+	float:left;
+}
+.list_middle{
+	float: left;
+	margin-top:1px;
+	margin-left:15px;
+}
+.color{
+	color:#dd328f;
+	font-weight: 700;
+}
+.fengmian{
+		width:55px;
+	height: 55px;
+	float: right;
+}
+
+.clear{
+  clear:both;
+}
+.list_body_img{
+  padding:8px 0;
+  width:100%;
+  margin-left:-12px;
+}
+.list_body_img .active{
+
+}
+.dashang_img{
+  width:20px;
+  height: 20px;
+  border-radius:100px;
+  margin-left:-8px;
+  vertical-align: middle;
+  margin-top:-1px;
+}
+.list_foot{
+  margin-left: 5px;
+}
+.list_foot_text{
+  font-size:10px;
+  margin-left:8px;
+
+}

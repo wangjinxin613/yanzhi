@@ -1,0 +1,213 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">全省网络零售额总览</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（十四）<span id="year"></span>全省网络零售不同模式店铺数量分布与变化</p>
+            <p style=" position:absolute; right:240px; top:130px; font-size:16px;">店铺数量环比变化 （单位:个）</p>
+            <div id="chart1" style=" float:left; height:450px;width:380px; margin-left: 50px;"></div>
+            <div id="chart2" style=" float:left; height:450px; width:400px;  "></div>
+
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+
+        <div class="page-even">
+            <span>14</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, dataname1, dataexchange1, dataname2, dataexchange2;
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/14.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                summary = data.summary;
+                dataname1 = data.dataname1;
+                dataexchange1 = data.dataexchange1;
+                dataname2 = data.dataname2;
+                dataexchange2 = data.dataexchange2;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        //更新DOM
+        $('#year').html(year);
+        $('#summary').html(summary);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            title: {
+
+            },
+            legend: {
+                x: 'center',
+                y: '16%',
+                data: dataname1
+            },
+            calculable: true,
+            series: [{
+                name: '面积模式',
+                type: 'pie',
+                radius: ['25%', '70%'],
+                center: ['center', '55%'],
+                roseType: 'area',
+                x: '50%', // for funnel
+                max: 40, // for funnel
+                sort: 'ascending', // for funnel
+                data: [{
+                    name: dataname1[1],
+                    value: dataexchange1[1],
+                    itemStyle: {
+                        normal: {
+                            color: '#FFA000',
+                            label: {
+                                show: true,
+                                position: 'inside',
+                                textStyle: {
+                                    fontSize: '14',
+                                    color: 'black',
+                                    fontWeight: 'bold'
+                                },
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: dataname1[0],
+                    value: dataexchange1[0],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                            label: {
+                                show: true,
+                                position: 'inside',
+                                textStyle: {
+                                    fontSize: '14',
+                                    color: 'black',
+                                    fontWeight: 'bold'
+                                },
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }]
+            }]
+        })
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+
+        // 指定图表的配置项和数据
+        myChart2.setOption({
+            title: {
+
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                formatter: function(params) {
+                    var tar = params[1];
+                    return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 10,
+                        fontWeight: '600',
+                        fontFamily: '宋体'
+                    }
+                },
+                data: dataname2,
+            },
+            yAxis: {
+                type: 'value',
+                show: false
+            },
+            series: [{
+                name: '辅助',
+                type: 'bar',
+                stack: '总量',
+                barWidth: 60,
+            }, {
+                name: '交易额',
+                type: 'bar',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside',
+                        color: '#53C3F1'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+                data: dataexchange2
+            }]
+        })
+    </script>
+
+</body>
+
+</html>

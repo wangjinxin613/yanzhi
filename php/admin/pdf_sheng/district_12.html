@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">全省网络零售额总览</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（十二）<span id="year"></span>全省网络零售不同行业交易额占比</p>
+            <div id="chart" style=" height:450px; width:800px;margin: 0 auto;"></div>
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+        <div class="page-even">
+            <span>12</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/12.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#year').html(year);
+        $('#summary').html(summary);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        myChart.setOption({
+            title: {
+
+            },
+
+            legend: {
+                orient: 'vertical',
+                x: '88%',
+                y: '10%',
+                data: [keys[0], keys[1], keys[2]]
+            },
+            calculable: true,
+            series: [{
+                name: '访问来源',
+                type: 'pie',
+                radius: '65%',
+                data: [{
+                    name: keys[0],
+                    value: values[0],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)',
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[1],
+                    value: values[1],
+                    itemStyle: {
+                        normal: {
+                            color: '#FFA000',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[2],
+                    value: values[2],
+                    itemStyle: {
+                        normal: {
+                            color: '#BA68c8',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[3],
+                    value: values[3],
+                    itemStyle: {
+                        normal: {
+                            color: '#9575CD',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[4],
+                    value: values[4],
+                    itemStyle: {
+                        normal: {
+                            color: '#7986CB',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[5],
+                    value: values[5],
+                    itemStyle: {
+                        normal: {
+                            color: '#64B5F6',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[6],
+                    value: values[6],
+                    itemStyle: {
+                        normal: {
+                            color: '#4FC3F7',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[7],
+                    value: values[7],
+                    itemStyle: {
+                        normal: {
+                            color: '#4DD0E1',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[8],
+                    value: values[8],
+                    itemStyle: {
+                        normal: {
+                            color: '#4DB6AC',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[9],
+                    value: values[9],
+                    itemStyle: {
+                        normal: {
+                            color: '#81C784',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[10],
+                    value: values[10],
+                    itemStyle: {
+                        normal: {
+                            color: '#AED581',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[11],
+                    value: values[11],
+                    itemStyle: {
+                        normal: {
+                            color: '#DCE775',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, ],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        })
+    </script>
+</body>
+
+</html>

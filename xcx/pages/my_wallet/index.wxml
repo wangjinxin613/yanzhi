@@ -1,0 +1,28 @@
+<view class="head">
+     <image src="/images/wallet.png" mode="widthFix"></image>
+</view>
+<view style="text-align:center;">
+     钱包余额
+</view>
+<view style="text-align:center;font-size:35px;font-weight:700;margin-top:5px;">
+     ￥{{userInfo.money}}
+</view>
+
+<view style="text-align:center;font-size:12px;margin-top:5px;text-decoration:underline">
+ <navigator url="tixian_log" open-type="navigate" hover-class="none">
+     提现记录
+	</navigator>
+</view>
+<form bindsubmit="submit">
+<view class="tixian">
+	<label>提现金额</label>
+	<input type="digit" placeholder='请输入提现金额' class="tixian_input" name="money"/>
+	<view class="clear"></view>
+</view>
+<view class="btn">
+	<button form-type="submit" form-type='submit'>提现</button>
+</view>
+<view class="tip">	
+	提现金额10元起，提现手续费1%，提现申请提交后请关注微信公众号“颜值物语”，点击底部菜单栏“提现”按钮提现提现申请将在1个工作日内处理
+</view>
+</form>

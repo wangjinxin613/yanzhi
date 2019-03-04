@@ -1,0 +1,54 @@
+<!--index.wxml
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>
+-->
+<view class="member">
+     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信一键登录授权 </button>
+     <block wx:else>
+          <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover" mode="widthFix"></image>
+     </block>
+     <view class="nickname">{{userInfo.nickName}}</view>
+     <view class="userid">赏图ID：{{userInfo.id}}</view>
+</view>
+<view class="member_list">
+     <navigator url="my_send" open-type="navigate" hover-class="none">
+          <view class="single">
+               <image src="/images/my_send.png"></image>
+               <text style="margin-left:10px;">我的发布</text>
+               <image src="/images/right.png" class="right" />
+          </view>
+     </navigator>
+     <navigator url="/pages/my_reward/index" open-type="navigate" hover-class="none">
+          <view class="single">
+               <image src="/images/my_reward.png"></image>
+               <text style="margin-left:10px;">我的赞赏</text>
+               <image src="/images/right.png" class="right" />
+          </view>
+     </navigator>
+     <navigator url="/pages/my_wallet/index" open-type="navigate" hover-class="none">
+          <view class="single">
+               <image src="/images/my_wallet.png"></image>
+               <text style="margin-left:10px;">我的钱包</text>
+               <image src="/images/right.png" class="right"></image>
+               <text style="float:right" decode="{{true}}">￥{{userInfo.money}}&nbsp;</text>
+          </view>
+     </navigator>
+     <navigator url="/pages/notice/index" open-type="navigate" hover-class="none">
+          <view class="single">
+               <image src="/images/my_notice.png"></image>
+               <text style="margin-left:10px;">赞赏通知</text>
+               <image src="/images/right.png" class="right" />
+               <text style="float:right" decode="{{true}}"><block wx:if="{{userInfo.notice == 1}}">全部推送</block><block wx:else>不推送</block>&nbsp;</text>
+          </view>
+     </navigator>
+</view>

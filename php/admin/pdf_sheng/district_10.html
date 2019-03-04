@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">全省网络零售额总览</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（十）<span id="year"></span>全省网络零售不同模式交易额分布</p>
+            <div id="chart1" style=" height:550px; width:800px; margin: auto;"></div>
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+        <div class="page-even">
+            <span>10</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/10.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            title: {
+
+            },
+            legend: {
+                x: 'center',
+                data: keys
+            },
+            calculable: true,
+            series: [{
+                name: '面积模式',
+                type: 'pie',
+                radius: ['25%', '52%'],
+                center: ['center', '45%'],
+                roseType: 'area',
+                x: '50%', // for funnel
+                max: 40, // for funnel
+                sort: 'ascending', // for funnel
+                data: [{
+                    name: keys[1],
+                    value: values[1],
+                    itemStyle: {
+                        normal: {
+                            color: '#FFA000',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true,
+                            }
+                        }
+                    }
+                }, {
+                    name: keys[0],
+                    value: values[0],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true,
+                            }
+                        }
+                    }
+                }, ]
+            }]
+        })
+
+        // 基于准备好的dom，初始化echarts实例
+        // var myChart2 = echarts.init(document.getElementById('chart2'));
+
+        // 指定图表的配置项和数据
+        // myChart2.setOption({
+        //     title: {
+
+        //     },
+        //     calculable: true,
+        //     series: [{
+        //         name: '访问来源',
+        //         type: 'pie',
+        //         radius: '50%',
+        //         data: [{
+        //             value: platform_data1,
+        //             name: platform1,
+        //             itemStyle: {
+        //                 normal: {
+        //                     color: '#0277BD',
+        //                     label: {
+        //                         show: true,
+        //                         formatter: '{b}({d}%)',
+        //                     },
+        //                     labelLine: {
+        //                         show: true
+        //                     }
+        //                 }
+        //             }
+        //         }, {
+        //             value: platform_data2,
+        //             name: platform2,
+        //             itemStyle: {
+        //                 normal: {
+        //                     color: '#FFA000',
+        //                     label: {
+        //                         show: true,
+        //                         formatter: '{b}({d}%)'
+        //                     },
+        //                     labelLine: {
+        //                         show: true
+        //                     }
+        //                 }
+        //             }
+        //         }, {
+        //             value: platform_data3,
+        //             name: platform3,
+        //             itemStyle: {
+        //                 normal: {
+        //                     color: '#BA68C8',
+        //                     label: {
+        //                         show: true,
+        //                         formatter: '{b}({d}%)'
+        //                     },
+        //                     labelLine: {
+        //                         show: true
+        //                     }
+        //                 }
+        //             }
+        //         }, {
+        //             value: platform_data4,
+        //             name: platform4,
+        //             itemStyle: {
+        //                 normal: {
+        //                     color: '#9575CD',
+        //                     label: {
+        //                         show: true,
+        //                         formatter: '{b}({d}%)'
+        //                     },
+        //                     labelLine: {
+        //                         show: true
+        //                     }
+        //                 }
+        //             }
+        //         }, {
+        //             value: platform_data5,
+        //             name: platform5,
+        //             itemStyle: {
+        //                 normal: {
+        //                     color: '#BEBEBE',
+        //                     label: {
+        //                         show: true,
+        //                         formatter: '{b}({d}%)'
+        //                     },
+        //                     labelLine: {
+        //                         show: true
+        //                     }
+        //                 }
+        //             }
+        //         }, ],
+        //         itemStyle: {
+        //             emphasis: {
+        //                 shadowBlur: 10,
+        //                 shadowOffsetX: 0,
+        //                 shadowColor: 'rgba(0, 0, 0, 0.5)'
+        //             }
+        //         }
+        //     }]
+        // })
+    </script>
+</body>
+
+</html>

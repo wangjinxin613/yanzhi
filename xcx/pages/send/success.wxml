@@ -1,0 +1,22 @@
+<view class="head">
+	<view class="background" style="background:#383152;"><image src="/icon/shang.png" class="shang"/></view>
+	
+	<image src="{{erweima}}" class="erweima" mode='widthFix' bindtap="shoutu" data-src="{{erweima}}"></image>
+	<view class="tip">长按识别或微信扫一扫小程序码，
+查看TA的私房照</view>
+</view>
+<view class="text">
+	<view style="color:#f24646;font-size:22px;font-weight:800">发布成功</view>
+	<view style="color:#2e2e2e;margin-top:10px;" ><text decode="{{true}}">将小程序码转发出去让你的朋友打赏吧
+打赏越多可能被推荐到首页
+</text></view>
+</view>
+
+
+<view class="foot">
+	<button class="btn1" open-type="share">转发给好友</button>
+	<navigator url="/pages/index/index" open-type="switchTab" hover-class="none">
+		<button class="btn2">返回主页</button>
+	</navigator>
+	<button class="btn2" bindtap="baocun" data-src="{{erweima}}" style="background:#383152">保存二维码</button>
+</view>

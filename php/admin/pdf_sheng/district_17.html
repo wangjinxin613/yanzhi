@@ -1,0 +1,314 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title" style="width: 55%;">全省网络零售不同模式店铺交易额TOP30</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（十七）<span id="year"></span>全省网络零售B2C店铺交易额TOP30（下半年）</p>
+
+            <div class="panel panel-primary" style="width:850px;margin-left: 30px;">
+                <div class="panel-heading" style="padding-left:20px; font-size:16px; font-weight:bold;">店铺交易额排行</div>
+                <div class="panel-body" style="padding:0 20px; ">
+                    <div id="chart1" style=" float:left; width:400px; padding-right:5px; margin-right:5px; border-right:1px solid #DDDDDD;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>店铺名称</th>
+                                    <th>交易额（万元）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td id="shop1"></td>
+                                    <td id="money1"></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td id="shop2"></td>
+                                    <td id="money2"></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td id="shop3"></td>
+                                    <td id="money3"></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td id="shop4"></td>
+                                    <td id="money4"></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td id="shop5"></td>
+                                    <td id="money5"></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td id="shop6"></td>
+                                    <td id="money6"></td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td id="shop7"></td>
+                                    <td id="money7"></td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td id="shop8"></td>
+                                    <td id="money8"></td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td id="shop9"></td>
+                                    <td id="money9"></td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td id="shop10"></td>
+                                    <td id="money10"></td>
+                                </tr>
+                                <tr>
+                                    <td>11</td>
+                                    <td id="shop11"></td>
+                                    <td id="money11"></td>
+                                </tr>
+                                <tr>
+                                    <td>12</td>
+                                    <td id="shop12"></td>
+                                    <td id="money12"></td>
+                                </tr>
+                                <tr>
+                                    <td>13</td>
+                                    <td id="shop13"></td>
+                                    <td id="money13"></td>
+                                </tr>
+                                <tr>
+                                    <td>14</td>
+                                    <td id="shop14"></td>
+                                    <td id="money14"></td>
+                                </tr>
+                                <tr>
+                                    <td>15</td>
+                                    <td id="shop15"></td>
+                                    <td id="money15"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="chart2" style="float:left;width:400px;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>店铺名称</th>
+                                    <th>交易额（万元）</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>16</td>
+                                    <td id="shop16"></td>
+                                    <td id="money16"></td>
+                                </tr>
+                                <tr>
+                                    <td>17</td>
+                                    <td id="shop17"></td>
+                                    <td id="money17"></td>
+                                </tr>
+                                <tr>
+                                    <td>18</td>
+                                    <td id="shop18"></td>
+                                    <td id="money18"></td>
+                                </tr>
+                                <tr>
+                                    <td>19</td>
+                                    <td id="shop19"></td>
+                                    <td id="money19"></td>
+                                </tr>
+                                <tr>
+                                    <td>20</td>
+                                    <td id="shop20"></td>
+                                    <td id="money20"></td>
+                                </tr>
+                                <tr>
+                                    <td>21</td>
+                                    <td id="shop21"></td>
+                                    <td id="money21"></td>
+                                </tr>
+                                <tr>
+                                    <td>22</td>
+                                    <td id="shop22"></td>
+                                    <td id="money22"></td>
+                                </tr>
+                                <tr>
+                                    <td>23</td>
+                                    <td id="shop23"></td>
+                                    <td id="money23"></td>
+                                </tr>
+                                <tr>
+                                    <td>24</td>
+                                    <td id="shop24"></td>
+                                    <td id="money24"></td>
+                                </tr>
+                                <tr>
+                                    <td>25</td>
+                                    <td id="shop25"></td>
+                                    <td id="money25"></td>
+                                </tr>
+                                <tr>
+                                    <td>26</td>
+                                    <td id="shop26"></td>
+                                    <td id="money26"></td>
+                                </tr>
+                                <tr>
+                                    <td>27</td>
+                                    <td id="shop27"></td>
+                                    <td id="money27"></td>
+                                </tr>
+                                <tr>
+                                    <td>28</td>
+                                    <td id="shop28"></td>
+                                    <td id="money28"></td>
+                                </tr>
+                                <tr>
+                                    <td>29</td>
+                                    <td id="shop29"></td>
+                                    <td id="money29"></td>
+                                </tr>
+                                <tr>
+                                    <td>30</td>
+                                    <td id="shop30"></td>
+                                    <td id="money30"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p class="summary"></p>
+
+        <div class="page-odd">
+            <span>17</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/17.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#year').html(year);
+
+        $('#shop1').html(keys[0]);
+        $('#shop2').html(keys[1]);
+        $('#shop3').html(keys[2]);
+        $('#shop4').html(keys[3]);
+        $('#shop5').html(keys[4]);
+        $('#shop6').html(keys[5]);
+        $('#shop7').html(keys[6]);
+        $('#shop8').html(keys[7]);
+        $('#shop9').html(keys[8]);
+        $('#shop10').html(keys[9]);
+        $('#shop11').html(keys[10]);
+        $('#shop12').html(keys[11]);
+        $('#shop13').html(keys[12]);
+        $('#shop14').html(keys[13]);
+        $('#shop15').html(keys[14]);
+        $('#shop16').html(keys[15]);
+        $('#shop17').html(keys[16]);
+        $('#shop18').html(keys[17]);
+        $('#shop19').html(keys[18]);
+        $('#shop20').html(keys[19]);
+        $('#shop21').html(keys[20]);
+        $('#shop22').html(keys[21]);
+        $('#shop23').html(keys[22]);
+        $('#shop24').html(keys[23]);
+        $('#shop25').html(keys[24]);
+        $('#shop26').html(keys[25]);
+        $('#shop27').html(keys[26]);
+        $('#shop28').html(keys[27]);
+        $('#shop29').html(keys[28]);
+        $('#shop30').html(keys[29]);
+
+        $('#money1').html(values[0]);
+        $('#money2').html(values[1]);
+        $('#money3').html(values[2]);
+        $('#money4').html(values[3]);
+        $('#money5').html(values[4]);
+        $('#money6').html(values[5]);
+        $('#money7').html(values[6]);
+        $('#money8').html(values[7]);
+        $('#money9').html(values[8]);
+        $('#money10').html(values[9]);
+        $('#money11').html(values[10]);
+        $('#money12').html(values[11]);
+        $('#money13').html(values[12]);
+        $('#money14').html(values[13]);
+        $('#money15').html(values[14]);
+        $('#money16').html(values[15]);
+        $('#money17').html(values[16]);
+        $('#money18').html(values[17]);
+        $('#money19').html(values[18]);
+        $('#money20').html(values[19]);
+        $('#money21').html(values[20]);
+        $('#money22').html(values[21]);
+        $('#money23').html(values[22]);
+        $('#money24').html(values[23]);
+        $('#money25').html(values[24]);
+        $('#money26').html(values[25]);
+        $('#money27').html(values[26]);
+        $('#money28').html(values[27]);
+        $('#money29').html(values[28]);
+        $('#money30').html(values[29]);
+    </script>
+
+</body>
+
+</html>

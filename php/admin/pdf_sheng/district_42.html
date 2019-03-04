@@ -1,0 +1,467 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">各市网络零售额分析</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（四十二）<span id="year"></span>泰州市网络零售分析</p>
+            <p style="position:absolute; right:22%; top:125px; font-weight:bold; font-size:18px;"><span id="year2"></span>企业零售遴选</p>
+
+            <div id="chart" style=" height:450px; width:460px; float:left; "></div>
+            <div id="chart2" style="height:450px; margin-top:50px; width:430px; float:right">
+
+                <table class="table table-striped" style=" border:2px solid #DDD">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>企业名称</th>
+                            <th>县区</th>
+                            <th>销售额</th>
+                            <!--<th style="width: 60px">占比(‰)</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td id="name1">223</td>
+                            <td id="place1" style="width: 90px"></td>
+                            <td id="money1"></td>
+                            <!--<td id="proportion1">17.61%</td>-->
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td id="name2"></td>
+                            <td id="place2"></td>
+                            <td id="money2"></td>
+                            <!--<td id="proportion2"></td>-->
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td id="name3"></td>
+                            <td id="place3"></td>
+                            <td id="money3"></td>
+                            <!--<td id="proportion3"></td>-->
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td id="name4"></td>
+                            <td id="place4"></td>
+                            <td id="money4"></td>
+                            <!--<td id="proportion4"></td>-->
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td id="name5"></td>
+                            <td id="place5"></td>
+                            <td id="money5"></td>
+                            <!--<td id="proportion5"></td>-->
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td id="name6"></td>
+                            <td id="place6"></td>
+                            <td id="money6"></td>
+                            <!--<td id="proportion6"></td>-->
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td id="name7"></td>
+                            <td id="place7"></td>
+                            <td id="money7"></td>
+                            <!--<td id="proportion7"></td>-->
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td id="name8"></td>
+                            <td id="place8"></td>
+                            <td id="money8"></td>
+                            <!--<td id="proportion8"></td>-->
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td id="name9"></td>
+                            <td id="place9"></td>
+                            <td id="money9"></td>
+                            <!--<td id="proportion9"></td>-->
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td id="name10"></td>
+                            <td id="place10"></td>
+                            <td id="money10"></td>
+                            <!--<td id="proportion10"></td>-->
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td id="name11"></td>
+                            <td id="place11"></td>
+                            <td id="money11"></td>
+                            <!--<td id="proportion11"></td>-->
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td id="name12"></td>
+                            <td id="place12"></td>
+                            <td id="money12"></td>
+                            <!--<td id="proportion12"></td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="line"></div>
+            <p id="summary"></p>
+            <div class="page-even">
+                <span>42</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, year2, summary, datavalue1, datavalue2;
+        var keys1 = [],
+            keys2 = [],
+            values1 = [],
+            values2 = [],
+            names = [],
+            places = [],
+            moneys = [],
+            proportions = [];
+
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/42.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                year2 = data.year2;
+                summary = data.summary;
+                datavalue1 = data.datavalue1;
+                datavalue2 = data.datavalue2;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue1) {
+            for (var newkey in datavalue1[key]) {
+                keys1.push(newkey);
+                values1.push(datavalue1[key][newkey]);
+            }
+        }
+        for (var key in datavalue2) {
+            for (var newkey in datavalue2[key]) {
+                switch (newkey) {
+                    case "name":
+                        names.push(datavalue2[key][newkey]);
+                        break;
+                    case "place":
+                        places.push(datavalue2[key][newkey]);
+                        break;
+                    case "money":
+                        moneys.push(datavalue2[key][newkey]);
+                        break;
+                    case "proportion":
+                        proportions.push(datavalue2[key][newkey]);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        //更新DOM
+        $('#year').html(year);
+        $('#year2').html(year2);
+        $('#summary').html(summary);
+
+        $('#name1').html(names[0]);
+        $('#name2').html(names[1]);
+        $('#name3').html(names[2]);
+        $('#name4').html(names[3]);
+        $('#name5').html(names[4]);
+        $('#name6').html(names[5]);
+        $('#name7').html(names[6]);
+        $('#name8').html(names[7]);
+        $('#name9').html(names[8]);
+        $('#name10').html(names[9]);
+        $('#name11').html(names[10]);
+        $('#name12').html(names[11]);
+
+        $('#place1').html(places[0]);
+        $('#place2').html(places[1]);
+        $('#place3').html(places[2]);
+        $('#place4').html(places[3]);
+        $('#place5').html(places[4]);
+        $('#place6').html(places[5]);
+        $('#place7').html(places[6]);
+        $('#place8').html(places[7]);
+        $('#place9').html(places[8]);
+        $('#place10').html(places[9]);
+        $('#place11').html(places[10]);
+        $('#place12').html(places[11]);
+
+        $('#money1').html(moneys[0]);
+        $('#money2').html(moneys[1]);
+        $('#money3').html(moneys[2]);
+        $('#money4').html(moneys[3]);
+        $('#money5').html(moneys[4]);
+        $('#money6').html(moneys[5]);
+        $('#money7').html(moneys[6]);
+        $('#money8').html(moneys[7]);
+        $('#money9').html(moneys[8]);
+        $('#money10').html(moneys[9]);
+        $('#money11').html(moneys[10]);
+        $('#money12').html(moneys[11]);
+
+        $('#proportion1').html(proportions[0]);
+        $('#proportion2').html(proportions[1]);
+        $('#proportion3').html(proportions[2]);
+        $('#proportion4').html(proportions[3]);
+        $('#proportion5').html(proportions[4]);
+        $('#proportion6').html(proportions[5]);
+        $('#proportion7').html(proportions[6]);
+        $('#proportion8').html(proportions[7]);
+        $('#proportion9').html(proportions[8]);
+        $('#proportion10').html(proportions[9]);
+        $('#proportion11').html(proportions[10]);
+        $('#proportion12').html(proportions[11]);
+
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        myChart.setOption({
+            title: {
+
+            },
+            legend: {
+                orient: 'vertical',
+                x: '70%',
+                y: '10%',
+                data: [keys1[0], keys1[1], keys1[2]]
+            },
+            calculable: true,
+            series: [{
+                name: '访问来源',
+                type: 'pie',
+                radius: '45%',
+                data: [{
+                    value: values1[0],
+                    name: keys1[0],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)',
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[1],
+                    name: keys1[1],
+                    itemStyle: {
+                        normal: {
+                            color: '#FFA000',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[2],
+                    name: keys1[2],
+                    itemStyle: {
+                        normal: {
+                            color: '#BA68c8',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[3],
+                    name: keys1[3],
+                    itemStyle: {
+                        normal: {
+                            color: '#9575CD',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[4],
+                    name: keys1[4],
+                    itemStyle: {
+                        normal: {
+                            color: '#7986CB',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[5],
+                    name: keys1[5],
+                    itemStyle: {
+                        normal: {
+                            color: '#64B5F6',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[6],
+                    name: keys1[6],
+                    itemStyle: {
+                        normal: {
+                            color: '#4FC3F7',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[7],
+                    name: keys1[7],
+                    itemStyle: {
+                        normal: {
+                            color: '#4DD0E1',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[8],
+                    name: keys1[8],
+                    itemStyle: {
+                        normal: {
+                            color: '#4DB6AC',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[9],
+                    name: keys1[9],
+                    itemStyle: {
+                        normal: {
+                            color: '#81C784',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[10],
+                    name: keys1[10],
+                    itemStyle: {
+                        normal: {
+                            color: '#AED581',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }, {
+                    value: values1[11],
+                    name: keys1[11],
+                    itemStyle: {
+                        normal: {
+                            color: '#DCE775',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true
+                            }
+                        }
+                    }
+                }],
+                itemStyle: {
+                    emphasis: {
+                        shadowBlur: 10,
+                        shadowOffsetX: 0,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                }
+            }]
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">各市不同行业网络零售额排名</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle" style="margin-bottom: 20px;">（三十）各市美妆饰品、游戏话费2016年网络零售额排名</p>
+            <div id="chart1" style=" float:left;  width:430px; padding-right:10px; border-right:1px solid #DDDDDD; border-bottom:1px solid #DDDDDD;margin-left: 20px;">
+                <p style="padding-top:4px;margin-left: 35px;"><img style=" width:50px; height:50px; margin-right:15px; border-radius: 20px;" src="img/power.png" /> 美妆饰品</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="border-top-left-radius: 10px;">排名</th>
+                            <th>地区</th>
+                            <th style="border-top-right-radius: 10px;">零售额(万)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td id="a_place1">223</td>
+                            <td id="a_money1">223</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td id="a_place2"></td>
+                            <td id="a_money2"></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td id="a_place3"></td>
+                            <td id="a_money3"></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td id="a_place4"></td>
+                            <td id="a_money4"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td id="a_place5"></td>
+                            <td id="a_money5"></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td id="a_place6"></td>
+                            <td id="a_money6"></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td id="a_place7"></td>
+                            <td id="a_money7"></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td id="a_place8"></td>
+                            <td id="a_money8"></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td id="a_place9"></td>
+                            <td id="a_money9"></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td id="a_place10"></td>
+                            <td id="a_money10"></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td id="a_place11"></td>
+                            <td id="a_money11"></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td id="a_place12"></td>
+                            <td id="a_money12"></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td id="a_place13"></td>
+                            <td id="a_money13"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="chart2" style=" float:left;  width:430px; margin-left:-1px; padding-left:10px; border-left:1px solid #DDDDDD;  border-bottom:1px solid #DDDDDD; ">
+                <p style="padding-top:4px; margin-left: 35px;"><img style=" width:50px; height:50px; margin-right:15px; border-radius: 20px;" src="img/expend.png" /> 游戏话费</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="border-top-left-radius: 10px;">排名</th>
+                            <th>地区</th>
+                            <th style="border-top-right-radius: 10px;">零售额(万)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td id="b_place1">223</td>
+                            <td id="b_money1"></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td id="b_place2"></td>
+                            <td id="b_money2"></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td id="b_place3"></td>
+                            <td id="b_money3"></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td id="b_place4"></td>
+                            <td id="b_money4"></td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td id="b_place5"></td>
+                            <td id="b_money5"></td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td id="b_place6"></td>
+                            <td id="b_money6"></td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td id="b_place7"></td>
+                            <td id="b_money7"></td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td id="b_place8"></td>
+                            <td id="b_money8"></td>
+                        </tr>
+                        <tr>
+                            <td>9</td>
+                            <td id="b_place9"></td>
+                            <td id="b_money9"></td>
+                        </tr>
+                        <tr>
+                            <td>10</td>
+                            <td id="b_place10"></td>
+                            <td id="b_money10"></td>
+                        </tr>
+                        <tr>
+                            <td>11</td>
+                            <td id="b_place11"></td>
+                            <td id="b_money11"></td>
+                        </tr>
+                        <tr>
+                            <td>12</td>
+                            <td id="b_place12"></td>
+                            <td id="b_money12"></td>
+                        </tr>
+                        <tr>
+                            <td>13</td>
+                            <td id="b_place13"></td>
+                            <td id="b_money13"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+
+        <div class="page-even">
+            <span>30</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, datavalue1, datavalue2;
+        var keys1 = [],
+            keys2 = [],
+            values1 = [],
+            values2 = [];
+
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/30.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                summary = data.summary;
+                datavalue1 = data.datavalue1;
+                datavalue2 = data.datavalue2;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue1) {
+            for (var newkey in datavalue1[key]) {
+                keys1.push(newkey);
+                values1.push(datavalue1[key][newkey]);
+            }
+        }
+        for (var key in datavalue2) {
+            for (var newkey in datavalue2[key]) {
+                keys2.push(newkey);
+                values2.push(datavalue2[key][newkey]);
+            }
+        }
+        //更新DOM
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        $('#a_place1').html(keys1[0]);
+        $('#a_place2').html(keys1[1]);
+        $('#a_place3').html(keys1[2]);
+        $('#a_place4').html(keys1[3]);
+        $('#a_place5').html(keys1[4]);
+        $('#a_place6').html(keys1[5]);
+        $('#a_place7').html(keys1[6]);
+        $('#a_place8').html(keys1[7]);
+        $('#a_place9').html(keys1[8]);
+        $('#a_place10').html(keys1[9]);
+        $('#a_place11').html(keys1[10]);
+        $('#a_place12').html(keys1[11]);
+        $('#a_place13').html(keys1[12]);
+        $('#a_money1').html(values1[0]);
+        $('#a_money2').html(values1[1]);
+        $('#a_money3').html(values1[2]);
+        $('#a_money4').html(values1[3]);
+        $('#a_money5').html(values1[4]);
+        $('#a_money6').html(values1[5]);
+        $('#a_money7').html(values1[6]);
+        $('#a_money8').html(values1[7]);
+        $('#a_money9').html(values1[8]);
+        $('#a_money10').html(values1[9]);
+        $('#a_money11').html(values1[10]);
+        $('#a_money12').html(values1[11]);
+        $('#a_money13').html(values1[12]);
+
+        $('#b_place1').html(keys2[0]);
+        $('#b_place2').html(keys2[1]);
+        $('#b_place3').html(keys2[2]);
+        $('#b_place4').html(keys2[3]);
+        $('#b_place5').html(keys2[4]);
+        $('#b_place6').html(keys2[5]);
+        $('#b_place7').html(keys2[6]);
+        $('#b_place8').html(keys2[7]);
+        $('#b_place9').html(keys2[8]);
+        $('#b_place10').html(keys2[9]);
+        $('#b_place11').html(keys2[10]);
+        $('#b_place12').html(keys2[11]);
+        $('#b_place13').html(keys2[12]);
+
+        $('#b_money1').html(values2[0]);
+        $('#b_money2').html(values2[1]);
+        $('#b_money3').html(values2[2]);
+        $('#b_money4').html(values2[3]);
+        $('#b_money5').html(values2[4]);
+        $('#b_money6').html(values2[5]);
+        $('#b_money7').html(values2[6]);
+        $('#b_money8').html(values2[7]);
+        $('#b_money9').html(values2[8]);
+        $('#b_money10').html(values2[9]);
+        $('#b_money11').html(values2[10]);
+        $('#b_money12').html(values2[11]);
+        $('#b_money13').html(values2[12]);
+    </script>
+</body>
+
+</html>

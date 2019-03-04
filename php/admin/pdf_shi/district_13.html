@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title"><span id="city"></span>店铺数据分析</div>
+        <div class="blank"></div>
+
+        <img class="logo" src="img/logo.jpeg" />
+        <p id="samllTitle">十三、<span id="year"></span>销售额数量级</p>
+        <div id="chart1" style="height:450px; width:800px; margin-left:70px;margin-top:60px;"></div>
+        <div id="line"></div>
+        <div id="summary"></div>
+        <div class="page-odd">
+            <span>13</span>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var city, year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/13.php",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                city = data.city;
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#city').html(city);
+        $('#year').html(year);
+        $('#summary').html(summary);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            title: {
+                text: '',
+                x: '34%',
+                y: '18'
+            },
+            grid: {
+                top: '8%',
+                left: '3%',
+                right: '10%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                name: '销售额（元）',
+                splitLine: {
+                    show: false
+                },
+                data: keys,
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        fontSize: 14,
+                        align: 'center',
+                        fontWeight: '500',
+                        fontFamily: '宋体'
+                    }
+                },
+            },
+            yAxis: {
+                type: 'value',
+                show: true,
+                name: '店铺数量（个）',
+            },
+            series: [{
+                type: 'bar',
+                stack: '总量',
+                barWidth: 80,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+                data: values
+            }]
+        })
+    </script>
+</body>
+
+</html>

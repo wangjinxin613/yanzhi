@@ -1,0 +1,370 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title"><span id="city"></span>店铺数据分析</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">十五、<span id="city2"></span>行业企业店铺TOP15</p>
+            <p style="padding-top:4px;margin-left: 35px;"><img style=" width:50px; height:50px; margin-right:15px; border-radius: 20px;" src="img/bag.jpeg" /> 服装鞋包</p>
+
+            <div id="chart1" style=" margin:28px auto;  width:900px;">
+                <table class="table table-striped" style="margin-top: -20px">
+                    <thead>
+                        <tr>
+                            <th style="border-top-left-radius: 10px;">公司名称</th>
+                            <th>店铺名称</th>
+                            <th>平台</th>
+                            <th>月销售额（万元）</th>
+                            <th>主营</th>
+                            <th>所在地</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="company1"></td>
+                            <td id="shop_name1"></td>
+                            <td id="platform1"></td>
+                            <td id="a_sales1"></td>
+                            <td id="major_business1"></td>
+                            <td id="location1"></td>
+                        </tr>
+                        <tr>
+                            <td id="company2"></td>
+                            <td id="shop_name2"></td>
+                            <td id="platform2"></td>
+                            <td id="a_sales2"></td>
+                            <td id="major_business2"></td>
+                            <td id="location2"></td>
+                        </tr>
+                        <tr>
+                            <td id="company3"></td>
+                            <td id="shop_name3"></td>
+                            <td id="platform3"></td>
+                            <td id="a_sales3"></td>
+                            <td id="major_business3"></td>
+                            <td id="location3"></td>
+                        </tr>
+                        <tr>
+                            <td id="company4"></td>
+                            <td id="shop_name4"></td>
+                            <td id="platform4"></td>
+                            <td id="a_sales4"></td>
+                            <td id="major_business4"></td>
+                            <td id="location4"></td>
+                        </tr>
+                        <tr>
+                            <td id="company5"></td>
+                            <td id="shop_name5"></td>
+                            <td id="platform5"></td>
+                            <td id="a_sales5"></td>
+                            <td id="major_business5"></td>
+                            <td id="location5"></td>
+                        </tr>
+                        <tr>
+                            <td id="company6"></td>
+                            <td id="shop_name6"></td>
+                            <td id="platform6"></td>
+                            <td id="a_sales6"></td>
+                            <td id="major_business6"></td>
+                            <td id="location6"></td>
+                        </tr>
+                        <tr>
+                            <td id="company7"></td>
+                            <td id="shop_name7"></td>
+                            <td id="platform7"></td>
+                            <td id="a_sales7"></td>
+                            <td id="major_business7"></td>
+                            <td id="location7"></td>
+                        </tr>
+                        <tr>
+                            <td id="company8"></td>
+                            <td id="shop_name8"></td>
+                            <td id="platform8"></td>
+                            <td id="a_sales8"></td>
+                            <td id="major_business8"></td>
+                            <td id="location8"></td>
+                        </tr>
+                        <tr>
+                            <td id="company9"></td>
+                            <td id="shop_name9"></td>
+                            <td id="platform9"></td>
+                            <td id="a_sales9"></td>
+                            <td id="major_business9"></td>
+                            <td id="location9"></td>
+                        </tr>
+                        <tr>
+                            <td id="company10"></td>
+                            <td id="shop_name10"></td>
+                            <td id="platform10"></td>
+                            <td id="a_sales10"></td>
+                            <td id="major_business10"></td>
+                            <td id="location10"></td>
+                        </tr>
+                        <tr>
+                            <td id="company11"></td>
+                            <td id="shop_name11"></td>
+                            <td id="platform11"></td>
+                            <td id="a_sales11"></td>
+                            <td id="major_business11"></td>
+                            <td id="location11"></td>
+                        </tr>
+                        <tr>
+                            <td id="company12"></td>
+                            <td id="shop_name12"></td>
+                            <td id="platform12"></td>
+                            <td id="a_sales12"></td>
+                            <td id="major_business12"></td>
+                            <td id="location12"></td>
+                        </tr>
+                        <tr>
+                            <td id="company13"></td>
+                            <td id="shop_name13"></td>
+                            <td id="platform13"></td>
+                            <td id="a_sales13"></td>
+                            <td id="major_business13"></td>
+                            <td id="location13"></td>
+                        </tr>
+                        <tr>
+                            <td id="company14"></td>
+                            <td id="shop_name14"></td>
+                            <td id="platform14"></td>
+                            <td id="a_sales14"></td>
+                            <td id="major_business14"></td>
+                            <td id="location14"></td>
+                        </tr>
+                        <tr>
+                            <td id="company15"></td>
+                            <td id="shop_name15"></td>
+                            <td id="platform15"></td>
+                            <td id="a_sales15"></td>
+                            <td id="major_business15"></td>
+                            <td id="location15"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="line"></div>
+        <div id="summary"></div>
+        <div class="page-odd">
+            <span>15</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var city, year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/15.php",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                city = data.city;
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        //更新DOM
+        $('#city').html(city);
+        $('#city2').html(city);
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        $('#company1').html(datavalue[0]["company"]);
+        $('#shop_name1').html(datavalue[0]["shop_name"]);
+        $('#platform1').html(datavalue[0]["platform"]);
+        $('#a_sales1').html(datavalue[0]["a_sales"]);
+        $('#b_sales1').html(datavalue[0]["b_sales"]);
+        $('#c_sales1').html(datavalue[0]["c_sales"]);
+        $('#d_sales1').html(datavalue[0]["d_sales"]);
+        $('#e_sales1').html(datavalue[0]["e_sales"]);
+        $('#major_business1').html(datavalue[0]["major_business"]);
+        $('#location1').html(datavalue[0]["place"]);
+
+        $('#company2').html(datavalue[1]["company"]);
+        $('#shop_name2').html(datavalue[1]["shop_name"]);
+        $('#platform2').html(datavalue[1]["platform"]);
+        $('#a_sales2').html(datavalue[1]["a_sales"]);
+        $('#b_sales2').html(datavalue[1]["b_sales"]);
+        $('#c_sales2').html(datavalue[1]["c_sales"]);
+        $('#d_sales2').html(datavalue[1]["d_sales"]);
+        $('#e_sales2').html(datavalue[1]["e_sales"]);
+        $('#major_business2').html(datavalue[1]["major_business"]);
+        $('#location2').html(datavalue[1]["place"]);
+
+        $('#company3').html(datavalue[2]["company"]);
+        $('#shop_name3').html(datavalue[2]["shop_name"]);
+        $('#platform3').html(datavalue[2]["platform"]);
+        $('#a_sales3').html(datavalue[2]["a_sales"]);
+        $('#b_sales3').html(datavalue[2]["b_sales"]);
+        $('#c_sales3').html(datavalue[2]["c_sales"]);
+        $('#d_sales3').html(datavalue[2]["d_sales"]);
+        $('#e_sales3').html(datavalue[2]["e_sales"]);
+        $('#major_business3').html(datavalue[2]["major_business"]);
+        $('#location3').html(datavalue[2]["place"]);
+
+        $('#company4').html(datavalue[3]["company"]);
+        $('#shop_name4').html(datavalue[3]["shop_name"]);
+        $('#platform4').html(datavalue[3]["platform"]);
+        $('#a_sales4').html(datavalue[3]["a_sales"]);
+        $('#b_sales4').html(datavalue[3]["b_sales"]);
+        $('#c_sales4').html(datavalue[3]["c_sales"]);
+        $('#d_sales4').html(datavalue[3]["d_sales"]);
+        $('#e_sales4').html(datavalue[3]["e_sales"]);
+        $('#major_business4').html(datavalue[3]["major_business"]);
+        $('#location4').html(datavalue[3]["place"]);
+
+        $('#company5').html(datavalue[4]["company"]);
+        $('#shop_name5').html(datavalue[4]["shop_name"]);
+        $('#platform5').html(datavalue[4]["platform"]);
+        $('#a_sales5').html(datavalue[4]["a_sales"]);
+        $('#b_sales5').html(datavalue[4]["b_sales"]);
+        $('#c_sales5').html(datavalue[4]["c_sales"]);
+        $('#d_sales5').html(datavalue[4]["d_sales"]);
+        $('#e_sales5').html(datavalue[4]["e_sales"]);
+        $('#major_business5').html(datavalue[4]["major_business"]);
+        $('#location5').html(datavalue[4]["place"]);
+
+        $('#company6').html(datavalue[5]["company"]);
+        $('#shop_name6').html(datavalue[5]["shop_name"]);
+        $('#platform6').html(datavalue[5]["platform"]);
+        $('#a_sales6').html(datavalue[5]["a_sales"]);
+        $('#b_sales6').html(datavalue[5]["b_sales"]);
+        $('#c_sales6').html(datavalue[5]["c_sales"]);
+        $('#d_sales6').html(datavalue[5]["d_sales"]);
+        $('#e_sales6').html(datavalue[5]["e_sales"]);
+        $('#major_business6').html(datavalue[5]["major_business"]);
+        $('#location6').html(datavalue[5]["place"]);
+
+        $('#company7').html(datavalue[6]["company"]);
+        $('#shop_name7').html(datavalue[6]["shop_name"]);
+        $('#platform7').html(datavalue[6]["platform"]);
+        $('#a_sales7').html(datavalue[6]["a_sales"]);
+        $('#b_sales7').html(datavalue[6]["b_sales"]);
+        $('#c_sales7').html(datavalue[6]["c_sales"]);
+        $('#d_sales7').html(datavalue[6]["d_sales"]);
+        $('#e_sales7').html(datavalue[6]["e_sales"]);
+        $('#major_business7').html(datavalue[6]["major_business"]);
+        $('#location7').html(datavalue[6]["place"]);
+
+        $('#company8').html(datavalue[7]["company"]);
+        $('#shop_name8').html(datavalue[7]["shop_name"]);
+        $('#platform8').html(datavalue[7]["platform"]);
+        $('#a_sales8').html(datavalue[7]["a_sales"]);
+        $('#b_sales8').html(datavalue[7]["b_sales"]);
+        $('#c_sales8').html(datavalue[7]["c_sales"]);
+        $('#d_sales8').html(datavalue[7]["d_sales"]);
+        $('#e_sales8').html(datavalue[7]["e_sales"]);
+        $('#major_business8').html(datavalue[7]["major_business"]);
+        $('#location8').html(datavalue[7]["place"]);
+
+        $('#company9').html(datavalue[8]["company"]);
+        $('#shop_name9').html(datavalue[8]["shop_name"]);
+        $('#platform9').html(datavalue[8]["platform"]);
+        $('#a_sales9').html(datavalue[8]["a_sales"]);
+        $('#b_sales9').html(datavalue[8]["b_sales"]);
+        $('#c_sales9').html(datavalue[8]["c_sales"]);
+        $('#d_sales9').html(datavalue[8]["d_sales"]);
+        $('#e_sales9').html(datavalue[8]["e_sales"]);
+        $('#major_business9').html(datavalue[8]["major_business"]);
+        $('#location9').html(datavalue[8]["place"]);
+
+        $('#company10').html(datavalue[9]["company"]);
+        $('#shop_name10').html(datavalue[9]["shop_name"]);
+        $('#platform10').html(datavalue[9]["platform"]);
+        $('#a_sales10').html(datavalue[9]["a_sales"]);
+        $('#b_sales10').html(datavalue[9]["b_sales"]);
+        $('#c_sales10').html(datavalue[9]["c_sales"]);
+        $('#d_sales10').html(datavalue[9]["d_sales"]);
+        $('#e_sales10').html(datavalue[9]["e_sales"]);
+        $('#major_business10').html(datavalue[9]["major_business"]);
+        $('#location10').html(datavalue[9]["place"]);
+
+        $('#company11').html(datavalue[10]["company"]);
+        $('#shop_name11').html(datavalue[10]["shop_name"]);
+        $('#platform11').html(datavalue[10]["platform"]);
+        $('#a_sales11').html(datavalue[10]["a_sales"]);
+        $('#b_sales11').html(datavalue[10]["b_sales"]);
+        $('#c_sales11').html(datavalue[10]["c_sales"]);
+        $('#d_sales11').html(datavalue[10]["d_sales"]);
+        $('#e_sales11').html(datavalue[10]["e_sales"]);
+        $('#major_business11').html(datavalue[10]["major_business"]);
+        $('#location11').html(datavalue[10]["place"]);
+
+        $('#company12').html(datavalue[11]["company"]);
+        $('#shop_name12').html(datavalue[11]["shop_name"]);
+        $('#platform12').html(datavalue[11]["platform"]);
+        $('#a_sales12').html(datavalue[11]["a_sales"]);
+        $('#b_sales12').html(datavalue[11]["b_sales"]);
+        $('#c_sales12').html(datavalue[11]["c_sales"]);
+        $('#d_sales12').html(datavalue[11]["d_sales"]);
+        $('#e_sales12').html(datavalue[11]["e_sales"]);
+        $('#major_business12').html(datavalue[11]["major_business"]);
+        $('#location12').html(datavalue[11]["place"]);
+
+        $('#company13').html(datavalue[12]["company"]);
+        $('#shop_name13').html(datavalue[12]["shop_name"]);
+        $('#platform13').html(datavalue[12]["platform"]);
+        $('#a_sales13').html(datavalue[12]["a_sales"]);
+        $('#b_sales13').html(datavalue[12]["b_sales"]);
+        $('#c_sales13').html(datavalue[12]["c_sales"]);
+        $('#d_sales13').html(datavalue[12]["d_sales"]);
+        $('#e_sales13').html(datavalue[12]["e_sales"]);
+        $('#major_business13').html(datavalue[12]["major_business"]);
+        $('#location13').html(datavalue[12]["place"]);
+
+        $('#company14').html(datavalue[13]["company"]);
+        $('#shop_name14').html(datavalue[13]["shop_name"]);
+        $('#platform14').html(datavalue[13]["platform"]);
+        $('#a_sales14').html(datavalue[13]["a_sales"]);
+        $('#b_sales14').html(datavalue[13]["b_sales"]);
+        $('#c_sales14').html(datavalue[13]["c_sales"]);
+        $('#d_sales14').html(datavalue[13]["d_sales"]);
+        $('#e_sales14').html(datavalue[13]["e_sales"]);
+        $('#major_business14').html(datavalue[13]["major_business"]);
+        $('#location14').html(datavalue[13]["place"]);
+
+        $('#company15').html(datavalue[14]["company"]);
+        $('#shop_name15').html(datavalue[14]["shop_name"]);
+        $('#platform15').html(datavalue[14]["platform"]);
+        $('#a_sales15').html(datavalue[14]["a_sales"]);
+        $('#b_sales15').html(datavalue[14]["b_sales"]);
+        $('#c_sales15').html(datavalue[14]["c_sales"]);
+        $('#d_sales15').html(datavalue[14]["d_sales"]);
+        $('#e_sales15').html(datavalue[14]["e_sales"]);
+        $('#major_business15').html(datavalue[14]["major_business"]);
+        $('#location15').html(datavalue[14]["place"]);
+    </script>
+
+</html>

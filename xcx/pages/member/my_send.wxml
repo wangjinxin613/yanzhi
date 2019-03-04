@@ -1,0 +1,32 @@
+<view wx:for="{{data_list}}" wx:key="key" wx:for-index="idx">
+     <view class="list">
+          <view class="first">
+               {{item.time}}
+               <text class="tuijian" wx:if="{{item.tuijian ==1}}">已推荐</text>
+          </view>
+          <view class="body">
+              {{item.beizhu}}
+          </view>
+          <view class="list_img" wx:for="{{item.imgUrl}}" wx:for-item="text" wx:key="key1">
+               <image src="{{text}}" data-src="{{text}}" data-lid="{{idx}}" mode="aspectFill" style="float:left;" bindtap="ylimg"></image>
+          </view>
+		<view style="clear:both"></view>
+          <view class="foot">
+			<block wx:if="{{item.rewardNumber > 0}}">
+               {{item.rewardNumber}}人打赏
+               <text style="color:#dd328f;font-weight:600;">{{item.rewardMoney}}</text> 元
+			</block>
+			<block wx:else>
+				还没有人打赏
+			</block>
+			
+               <view class="right" >
+			<navigator url="/pages/reward/my_send?lid={{item.id}}" open-type="navigate" hover-class="none">
+				<text> 转发给好友</text>
+					</navigator>
+               </view>
+               <image src="/images/zhuanfa.png" class="right_img" style="width:20px;height:18px;" />
+		
+          </view>
+     </view>
+</view>

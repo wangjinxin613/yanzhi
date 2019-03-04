@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">全省网络零售额总览</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（十六）<span id="year"></span>全省网络零售不同模式平均单店交易额环比变化</p>
+            <div id="chart1" style=" float:left; height:450px; width:430px; padding-left:30px;"></div>
+            <div id="chart2" style=" float:right; height:450px; width:430px; padding-right:30px; "></div>
+
+        </div>
+        <div id="line"></div>
+        <div class="page-even">
+            <span>16</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, dataname, dataexchange1, dataexchange2;
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/16.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                summary = data.summary;
+                dataname = data.dataname;
+                dataexchange1 = data.dataexchange1;
+                dataexchange2 = data.dataexchange2;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        //更新DOM
+        $('#year').html(year);
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            title: {
+                text: '',
+                x: '24%',
+                y: '18'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                data: ['B2C'],
+            },
+            yAxis: {
+                type: 'value',
+                show: true
+            },
+            legend: {
+                x: '60',
+                y: '20',
+                data: dataname
+            },
+            series: [{
+                name: dataname[0],
+                data: [dataexchange1[0]],
+                type: 'bar',
+                stack: '总量',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }, {
+                name: dataname[1],
+                data: [dataexchange1[1]],
+                type: 'bar',
+                stack: '总量2',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#FFA000',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }, {
+                name: dataname[2],
+                data: [dataexchange1[2]],
+                type: 'bar',
+                stack: '总量3',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#BA68c8',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }, {
+                name: dataname[3],
+                data: [dataexchange1[3]],
+                type: 'bar',
+                stack: '总量4',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#388f3c',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }]
+        })
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+
+        // 指定图表的配置项和数据
+        myChart2.setOption({
+            title: {
+                text: '',
+                x: '24%',
+                y: '18'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                data: ['C2C'],
+            },
+            yAxis: {
+                type: 'value',
+                show: true
+            },
+            legend: {
+                x: '60',
+                y: '20',
+                data: dataname
+            },
+            series: [{
+                name: '辅助',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD'
+                    },
+                    emphasis: {
+                        color: 'rgba(0,0,0,0)'
+                    }
+                },
+            }, {
+                name: dataname[0],
+                data: [dataexchange2[0]],
+                type: 'bar',
+                stack: '总量',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }, {
+                name: dataname[1],
+                data: [dataexchange2[1]],
+                type: 'bar',
+                stack: '总量2',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#FFA000',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }, {
+                name: dataname[2],
+                data: [dataexchange2[2]],
+                type: 'bar',
+                stack: '总量3',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#BA68c8',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }, {
+                name: dataname[3],
+                data: [dataexchange2[3]],
+                type: 'bar',
+                stack: '总量4',
+                barWidth: 60,
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#388f3c',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                }
+            }]
+        })
+    </script>
+
+</body>
+
+</html>

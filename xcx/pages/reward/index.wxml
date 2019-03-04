@@ -1,0 +1,44 @@
+<view class="head">
+     <image src="{{data_list.imgUrl[0]}}" class="background" mode="aspectFill"></image>
+
+     <image bindtap="bindViewTap" class="userinfo-avatar" src="{{data_list.avatarUrl}}" background-size="cover"></image>
+
+</view>
+<view class="head_text">
+     “{{data_list.nickName}}”的私房照已被锁定
+</view>
+<view class="head_body">
+     {{data_list.beizhu}}
+</view>
+<view class="chakan">
+     <view class="xian" style="margin-left:5%;"></view>
+     <view class="xian_text">打赏查看</view>
+     <view class="xian"></view>
+</view>
+<view class="clear"></view>
+<view class="reward">
+     <view class="single {{isSelect[0]}}" bindtap="selectBtn" data-hi="0" data-money="1.88">1.88元</view>
+     <view class="single left {{isSelect[1]}}" bindtap="selectBtn" data-hi="1" data-money="5.20">5.20元</view>
+     <view class="single left {{isSelect[2]}}" bindtap="selectBtn" data-hi="2" data-money="13.14">13.14元</view>
+     <view class="single {{isSelect[3]}}" bindtap="selectBtn" data-hi="3" data-money="20.13">20.13元</view>
+     <view class="single left {{isSelect[4]}}" bindtap="selectBtn" data-hi="4" data-money="52.00">52.00元</view>
+     <view class="single left {{isSelect[5]}}" bindtap="selectBtn" data-hi="5" data-money="88.88">88.88元</view>
+</view>
+<view class="clear"></view>
+<view style="vertical-align: center;">
+     <view class="btn" bindtap="rewardSuccess">
+          赏
+     </view>
+</view>
+<view class="list_foot">
+     <block wx:if="{{data_list.rewardNumber > 0}}">
+          <block wx:for="{{data_list.rewarderImg}}" wx:key="key">
+               <image src="{{item}}" class="dashang_img" />
+          </block>
+          <text class="list_foot_text">{{data_list.rewardName}} 等{{data_list.rewardNumber}}人已打赏</text>
+     </block>
+     <block wx:else>
+          <text style="text-align:center;">还没有人打赏</text>
+     </block>
+</view>
+

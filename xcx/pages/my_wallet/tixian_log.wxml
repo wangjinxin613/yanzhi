@@ -1,0 +1,15 @@
+<view class="table">
+  <view class="tr bg-w">
+    <view class="th" style="width:45%">时间</view>
+    <view class="th" style="width:30%">到账金额</view>
+    <view class="th" style="width:25%">提现进度</view>
+  </view>
+  <block wx:for="{{listData}}" wx:key="{{code}}">
+    <view class="tr bg-g">
+      <view class="td" style="width:40%">{{item.time}}</view>
+      <view class="td" style="width:30%">{{item.dao_money}}</view>
+      <view class="td color" style="width:25%" wx:if="{{item.status == 0}}">待处理</view>
+      <view class="td color" style="width:25%" wx:else>已到账</view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,16 @@
+<view class="head">
+	<image src="/images/success_back.png" class="background"></image>
+	<image src="/images/erweima.png" class="erweima" mode='widthFix' ></image>
+	<view class="tip">长按识别或微信扫一扫小程序码，
+查看TA的私房照</view>
+</view>
+<view class="text">
+	<view style="color:#f24646;font-size:22px;font-weight:800">发布成功</view>
+	<view style="color:#2e2e2e;margin-top:10px;" ><text decode="{{true}}">将小程序码转发出去让你的朋友打赏吧
+打赏越多可能被推荐到首页
+让更多的人看到吧</text></view>
+</view>
+<view class="foot">
+	<button class="btn1">转发给好友</button>
+	<button class="btn2">返回主页</button>
+</view>

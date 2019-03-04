@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">全国电商数据概况</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（一）<span id="year"></span>电商交易额、网络零售额及同比</p>
+            <p style=" position:absolute; left:10%;">单位：万亿元</p>
+            <div>
+                <p class="text1" style="position:absolute;left:380px;top:260px;font-size:16px;font-weight:bold;">同比增长<span id="percent1"></span>% ↗</p>
+            </div>
+            <div>
+                <p class="text2" style="position:absolute;left:865px;top:260px;font-size:16px;font-weight:bold;z-index:2;">同比增长<span id="percent2"></span>% ↗</p>
+            </div>
+            <div id="chart1" style="float:left;height:450px;width:385px;padding-left:30px;">
+            </div>
+            <div id="chart2" style="float:right;height:450px;width:385px;padding-right:30px;"></div>
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+        <div class="page-odd">
+            <span>1</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, summary, a1, a2, b1, b2, label;
+
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/1.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据 
+                year = data.year;
+                summary = data.summary;
+                a1 = data.a1;
+                a2 = data.a2;
+                b1 = data.b1;
+                b2 = data.b2;
+                label = data.label;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        var add1 = (a2 - a1).toFixed(2);
+        var add2 = (b2 - b1).toFixed(2);
+
+        var per1 = (add1 / a1 * 100).toFixed(2);
+        var per2 = (add2 / b1 * 100).toFixed(2);
+
+        //更新DOM
+        $('#percent1').html(per1);
+        $('#percent2').html(per2);
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data: [label, '同比增加量']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ['电商交易额'],
+                splitLine: {　　　　
+                    show: false　　
+                }
+            }, ],
+            yAxis: [{
+                splitLine: {　　　　
+                    show: false　　
+                },
+                type: 'value'
+            }],
+            series: [{
+                name: label,
+                type: 'bar',
+                stack: '电商交易额',
+                barWidth: 100,
+                data: [a1],
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+            }, {
+                name: '同比增加量',
+                type: 'bar',
+                stack: '电商交易额',
+                itemStyle: {
+                    normal: {
+                        color: '#FFA000',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+                barWidth: 100,
+                data: [add1]
+            }, ]
+        })
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart2 = echarts.init(document.getElementById('chart2'));
+
+        // 指定图表的配置项和数据
+        myChart2.setOption({
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                }
+            },
+            legend: {
+                data: [label, '同比增加量']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [{
+                type: 'category',
+                data: ['网络零售额'],
+                splitLine: {　　　　
+                    show: false　　
+                }
+            }, ],
+            yAxis: [{
+                splitLine: {　　　　
+                    show: false　　
+                },
+                type: 'value'
+            }],
+            series: [{
+                name: label,
+                type: 'bar',
+                stack: '网络零售额',
+                barWidth: 100,
+                data: [b1],
+                itemStyle: {
+                    normal: {
+                        color: '#0277BD',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+            }, {
+                name: '同比增加量',
+                type: 'bar',
+                stack: '网络零售额',
+                itemStyle: {
+                    normal: {
+                        color: '#FFA000',
+                        label: {
+                            show: true,
+                        },
+                        labelLine: {
+                            show: true
+                        }
+                    }
+                },
+                barWidth: 100,
+                data: [add2]
+            }, ]
+        })
+    </script>
+</body>
+
+</html>

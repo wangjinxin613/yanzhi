@@ -1,0 +1,56 @@
+/**index.wxss**/
+page{
+	background-color:#fff;
+	font-size: 13px;
+	color:#2e2e2e;
+
+}
+.head{
+	margin-top: 20px;
+	height: 300rpx;
+	text-align: center;
+}
+.head .background{
+	width:90%;
+	height: 600rpx;
+}
+.erweima{
+	position: absolute;
+
+	width: 46%;
+	left:27%;
+	height:200rpx;
+	margin-top:130rpx;
+}
+.tip{
+	position: absolute;
+
+	width: 46%;
+	left:27%;
+	margin-top:-100rpx;
+	font-size: 12px;
+	color: #fff;
+}
+.text{
+	margin-top:170px;
+	text-align: center;
+}
+.foot{
+	margin-top:30px;
+	padding-bottom: 30px;
+}
+.btn1{
+	width:60%;
+	background: #12cffd;
+	color: #fff;
+	font-size: 15px;
+	border-radius: 100px;
+}
+.btn2{
+	width:60%;
+	background: #dd328f;
+	color: #fff;
+	font-size: 15px;
+	margin-top: 10px;
+	border-radius: 100px;
+}

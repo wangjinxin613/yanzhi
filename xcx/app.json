@@ -1,0 +1,54 @@
+{
+	"pages": [
+		"pages/index/index",
+		"pages/member/index",
+		"pages/member/my_send",
+		"pages/my_reward/index",
+		"pages/my_wallet/index",
+		"pages/my_wallet/tixian_log",
+		"pages/notice/index",
+		"pages/send/index",
+		"pages/send/success",
+		"pages/reward/index",
+		"pages/reward/my_send",
+		"pages/logs/logs"
+	],
+	"window": {
+		"backgroundTextStyle": "dark",
+		"navigationBarBackgroundColor": "#414247",
+		"navigationBarTitleText": "图赏",
+		"navigationBarTextStyle": "white",
+		"enablePullDownRefresh": "true"
+	},
+	"tabBar": {
+		"color": "#fff",
+		"backgroundColor": "#383152",
+		"selectedColor": "#dd328f",
+		"position": "bottom",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "赏图",
+				"iconPath": "icon/home.png",
+				"selectedIconPath": "icon/home_active.png"
+			},
+			{
+				"pagePath": "pages/send/index",
+				"iconPath": "icon/send.png",
+				"text": "发布",
+				"selectedIconPath": "icon/send_active.png"
+			},
+			{
+				"pagePath": "pages/member/index",
+				"text": "我的",
+				"iconPath": "icon/my.png",
+				"selectedIconPath": "icon/my_active.png"
+			}
+		]
+	},
+	"networkTimeout": {
+		"request": 10000,
+		"downloadFile": 10000
+	},
+	"debug": true
+}

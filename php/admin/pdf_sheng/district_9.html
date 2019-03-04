@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+    <style>
+        .text1 {
+            background: #E9F9FC!important;
+            width: 320px;
+            padding: 10px;
+            position: absolute;
+            top: 180px;
+            left: 150px;
+            border-radius: 14px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="title">全省网络零售额总览</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">（九）<span id="year"></span>全省主要经济指标比较</p>
+            <div id="chart" style=" height:450px; width:800px; margin: 0 auto;"></div>
+            <p class="text1" id="text1"></p>
+        </div>
+        <div id="line"></div>
+        <p id="summary"></p>
+        <div class="page-odd">
+            <span>9</span>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var year, text1, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/9.json",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                year = data.year;
+                text1 = data.text1;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#year').html(year);
+        $('#text1').html(text1);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        myChart.setOption({
+            title: {
+                text: '',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+                },
+                formatter: function(params) {
+                    var tar = params[1];
+                    return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                splitLine: {
+                    show: false
+                },
+                axisLabel: {
+                    interval: 0,
+                    show: true,
+                    rotate: 0,
+                    margin: 20,
+                    textStyle: {
+                        fontSize: 13,
+                        align: 'center',
+                        fontWeight: '600',
+                        fontFamily: '宋体'
+
+                    }
+                },
+                data: keys,
+
+            },
+            yAxis: {
+                type: 'value',
+                show: false
+            },
+            series: [{
+                name: '辅助',
+                type: 'bar',
+                stack: '总量',
+                barWidth: 80,
+                itemStyle: {
+                    normal: {
+                        barBorderColor: 'rgba(0,0,0,0)',
+                        color: 'rgba(0,0,0,0)'
+                    },
+                    emphasis: {
+                        barBorderColor: 'rgba(0,0,0,0)',
+                        color: 'rgba(0,0,0,0)'
+                    }
+                },
+            }, {
+                name: '交易额',
+                type: 'bar',
+                stack: '总量',
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            // build a color map as your need.
+                            var colorList = [
+                                '#0277BD', '#0277BD', '#0277BD', '#0277BD',
+                            ];
+                            return colorList[params.dataIndex]
+                        },
+                        label: {
+                            show: true,
+                            position: 'top',
+                            formatter: '{c} %'
+                        },
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                data: values
+            }]
+        })
+    </script>
+</body>
+
+</html>

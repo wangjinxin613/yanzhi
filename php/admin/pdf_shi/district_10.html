@@ -1,0 +1,461 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title"><span id="city"></span>电商综合发展</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">十、<span id="year"></span>县区B2C不同行业销售额占比（%）</p>
+
+            <div style="width: 750px; margin: auto;margin-top:20px">
+                <table class="table table-bordered" style=" border:2px solid #DDD; height: 100px">
+                    <thead>
+                        <tr>
+                            <th>行业类目</th>
+                            <th id="place1"></th>
+                            <th id="place2"></th>
+                            <th id="place3"></th>
+                            <th id="place4"></th>
+                            <th id="place5"></th>
+                            <th id="place6"></th>
+                            <th id="place7"></th>
+                            <th id="place8"></th>
+                            <th id="place9"></th>
+                            <th id="place10"></th>
+                            <th id="place11"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="item1"></td>
+                            <td id="tiem1value1"></td>
+                            <td id="tiem2value1"></td>
+                            <td id="tiem3value1"></td>
+                            <td id="tiem4value1"></td>
+                            <td id="tiem5value1"></td>
+                            <td id="tiem6value1"></td>
+                            <td id="tiem7value1"></td>
+                            <td id="tiem8value1"></td>
+                            <td id="tiem9value1"></td>
+                            <td id="tiem10value1"></td>
+                            <td id="tiem11value1"></td>
+                        </tr>
+                        <tr>
+                            <td id="item2"></td>
+                            <td id="tiem1value2"></td>
+                            <td id="tiem2value2"></td>
+                            <td id="tiem3value2"></td>
+                            <td id="tiem4value2"></td>
+                            <td id="tiem5value2"></td>
+                            <td id="tiem6value2"></td>
+                            <td id="tiem7value2"></td>
+                            <td id="tiem8value2"></td>
+                            <td id="tiem9value2"></td>
+                            <td id="tiem10value2"></td>
+                            <td id="tiem11value2"></td>
+                        </tr>
+                        <tr>
+                            <td id="item3"></td>
+                            <td id="tiem1value3"></td>
+                            <td id="tiem2value3"></td>
+                            <td id="tiem3value3"></td>
+                            <td id="tiem4value3"></td>
+                            <td id="tiem5value3"></td>
+                            <td id="tiem6value3"></td>
+                            <td id="tiem7value3"></td>
+                            <td id="tiem8value3"></td>
+                            <td id="tiem9value3"></td>
+                            <td id="tiem10value3"></td>
+                            <td id="tiem11value3"></td>
+                        </tr>
+                        <tr>
+                            <td id="item4"></td>
+                            <td id="tiem1value4"></td>
+                            <td id="tiem2value4"></td>
+                            <td id="tiem3value4"></td>
+                            <td id="tiem4value4"></td>
+                            <td id="tiem5value4"></td>
+                            <td id="tiem6value4"></td>
+                            <td id="tiem7value4"></td>
+                            <td id="tiem8value4"></td>
+                            <td id="tiem9value4"></td>
+                            <td id="tiem10value4"></td>
+                            <td id="tiem11value4"></td>
+                        </tr>
+                        <tr>
+                            <td id="item5"></td>
+                            <td id="tiem1value5"></td>
+                            <td id="tiem2value5"></td>
+                            <td id="tiem3value5"></td>
+                            <td id="tiem4value5"></td>
+                            <td id="tiem5value5"></td>
+                            <td id="tiem6value5"></td>
+                            <td id="tiem7value5"></td>
+                            <td id="tiem8value5"></td>
+                            <td id="tiem9value5"></td>
+                            <td id="tiem10value5"></td>
+                            <td id="tiem11value5"></td>
+                        </tr>
+                        <tr>
+                            <td id="item6"></td>
+                            <td id="tiem1value6"></td>
+                            <td id="tiem2value6"></td>
+                            <td id="tiem3value6"></td>
+                            <td id="tiem4value6"></td>
+                            <td id="tiem5value6"></td>
+                            <td id="tiem6value6"></td>
+                            <td id="tiem7value6"></td>
+                            <td id="tiem8value6"></td>
+                            <td id="tiem9value6"></td>
+                            <td id="tiem10value6"></td>
+                            <td id="tiem11value6"></td>
+                        </tr>
+                        <tr>
+                            <td id="item7"></td>
+                            <td id="tiem1value7"></td>
+                            <td id="tiem2value7"></td>
+                            <td id="tiem3value7"></td>
+                            <td id="tiem4value7"></td>
+                            <td id="tiem5value7"></td>
+                            <td id="tiem6value7"></td>
+                            <td id="tiem7value7"></td>
+                            <td id="tiem8value7"></td>
+                            <td id="tiem9value7"></td>
+                            <td id="tiem10value7"></td>
+                            <td id="tiem11value7"></td>
+                        </tr>
+                        <tr>
+                            <td id="item8"></td>
+                            <td id="tiem1value8"></td>
+                            <td id="tiem2value8"></td>
+                            <td id="tiem3value8"></td>
+                            <td id="tiem4value8"></td>
+                            <td id="tiem5value8"></td>
+                            <td id="tiem6value8"></td>
+                            <td id="tiem7value8"></td>
+                            <td id="tiem8value8"></td>
+                            <td id="tiem9value8"></td>
+                            <td id="tiem10value8"></td>
+                            <td id="tiem11value8"></td>
+                        </tr>
+                        <tr>
+                            <td id="item9"></td>
+                            <td id="tiem1value9"></td>
+                            <td id="tiem2value9"></td>
+                            <td id="tiem3value9"></td>
+                            <td id="tiem4value9"></td>
+                            <td id="tiem5value9"></td>
+                            <td id="tiem6value9"></td>
+                            <td id="tiem7value9"></td>
+                            <td id="tiem8value9"></td>
+                            <td id="tiem9value9"></td>
+                            <td id="tiem10value9"></td>
+                            <td id="tiem11value9"></td>
+                        </tr>
+                        <tr>
+                            <td id="item10"></td>
+                            <td id="tiem1value10"></td>
+                            <td id="tiem2value10"></td>
+                            <td id="tiem3value10"></td>
+                            <td id="tiem4value10"></td>
+                            <td id="tiem5value10"></td>
+                            <td id="tiem6value10"></td>
+                            <td id="tiem7value10"></td>
+                            <td id="tiem8value10"></td>
+                            <td id="tiem9value10"></td>
+                            <td id="tiem10value10"></td>
+                            <td id="tiem11value10"></td>
+                        </tr>
+                        <tr>
+                            <td id="item11"></td>
+                            <td id="tiem1value11"></td>
+                            <td id="tiem2value11"></td>
+                            <td id="tiem3value11"></td>
+                            <td id="tiem4value11"></td>
+                            <td id="tiem5value11"></td>
+                            <td id="tiem6value11"></td>
+                            <td id="tiem7value11"></td>
+                            <td id="tiem8value11"></td>
+                            <td id="tiem9value11"></td>
+                            <td id="tiem10value11"></td>
+                            <td id="tiem11value11"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="width: 900px;height: 100px; margin: auto;margin-top:30px">
+                <p style="height: 30px; font-size: 10px">
+                    <span style="margin-right: 10px"><span id="name1"></span>排名前三的行业总占比为<span id="p1n"></span>%;</span>
+                    <span style="margin-right: 10px"><span id="name2"></span>排名前三的行业总占比为<span id="p2n"></span>%;</span>
+                    <span style="margin-right: 10px"><span id="name3"></span>排名前三的行业总占比为<span id="p3n"></span>%; </span>
+                    <span style="margin-right: 10px"><span id="name4"></span>排名前三的行业总占比为<span id="p4n"></span>%;</span>
+                </p>
+                <p style="height: 30px; font-size: 10px">
+                    <span style="margin-right: 10px"><span id="name5"></span>排名前三的行业总占比为<span id="p5n"></span>%</span>
+                    <span style="margin-right: 10px"><span id="name6"></span>排名前三的行业总占比为<span id="p6n"></span>%;</span>
+                    <span style="margin-right: 10px"><span id="name7"></span>排名前三的行业总占比为<span id="p7n"></span>%;</span>
+                    <span style="margin-right: 10px"><span id="name8"></span>排名前三的行业总占比为<span id="p8n"></span>%;</span>
+                </p>
+                <p style="height: 30px; font-size: 10px">
+                    <span style="margin-right: 10px"><span id="name9"></span>排名前三的行业总占比为<span id="p9n"></span>%;</span>
+                    <span style="margin-right: 10px"><span id="name10"></span>排名前三的行业总占比为<span id="p10n"></span>%;</span>
+                    <span style="margin-right: 10px"><span id="name11"></span>排名前三的行业总占比为<span id="p11n"></span>%;</span>
+                </p>
+            </div>
+            <div id="line"></div>
+            <div id="summary"></div>
+            <div class="page-even">
+                <span>10</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var city, year, summary, datavalue, items;
+        var place = [],
+            item = [],
+            pn = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/10.php",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                city = data.city;
+                year = data.year;
+                summary = data.summary;
+                items = data.items;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in items) {
+            item.push(items[key]);
+        }
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                switch (newkey) {
+                    case "place":
+                        place.push(datavalue[key][newkey]);
+                        break;
+                    case "pn":
+                        pn.push(datavalue[key][newkey]);
+                        break;
+                }
+            }
+        }
+
+        //更新DOM
+        $('#city').html(city);
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        $('#place1').html(place[0]);
+        $('#place2').html(place[1]);
+        $('#place3').html(place[2]);
+        $('#place4').html(place[3]);
+        $('#place5').html(place[4]);
+        $('#place6').html(place[5]);
+        $('#place7').html(place[6]);
+        $('#place8').html(place[7]);
+        $('#place9').html(place[8]);
+        $('#place10').html(place[9]);
+        $('#place11').html(place[10]);
+
+        $('#item1').html(item[0]);
+        $('#item2').html(item[1]);
+        $('#item3').html(item[2]);
+        $('#item4').html(item[3]);
+        $('#item5').html(item[4]);
+        $('#item6').html(item[5]);
+        $('#item7').html(item[6]);
+        $('#item8').html(item[7]);
+        $('#item9').html(item[8]);
+        $('#item10').html(item[9]);
+        $('#item11').html(item[10]);
+
+        $("#tiem1value1").html(datavalue[0][item[0]]);
+        $("#tiem1value2").html(datavalue[0][item[1]]);
+        $("#tiem1value3").html(datavalue[0][item[2]]);
+        $("#tiem1value4").html(datavalue[0][item[3]]);
+        $("#tiem1value5").html(datavalue[0][item[4]]);
+        $("#tiem1value6").html(datavalue[0][item[5]]);
+        $("#tiem1value7").html(datavalue[0][item[6]]);
+        $("#tiem1value8").html(datavalue[0][item[7]]);
+        $("#tiem1value9").html(datavalue[0][item[8]]);
+        $("#tiem1value10").html(datavalue[0][item[9]]);
+        $("#tiem1value11").html(datavalue[0][item[10]]);
+
+        $("#tiem2value1").html(datavalue[1][item[0]]);
+        $("#tiem2value2").html(datavalue[1][item[1]]);
+        $("#tiem2value3").html(datavalue[1][item[2]]);
+        $("#tiem2value4").html(datavalue[1][item[3]]);
+        $("#tiem2value5").html(datavalue[1][item[4]]);
+        $("#tiem2value6").html(datavalue[1][item[5]]);
+        $("#tiem2value7").html(datavalue[1][item[6]]);
+        $("#tiem2value8").html(datavalue[1][item[7]]);
+        $("#tiem2value9").html(datavalue[1][item[8]]);
+        $("#tiem2value10").html(datavalue[1][item[9]]);
+        $("#tiem2value11").html(datavalue[1][item[10]]);
+
+        $("#tiem3value1").html(datavalue[2][item[0]]);
+        $("#tiem3value2").html(datavalue[2][item[1]]);
+        $("#tiem3value3").html(datavalue[2][item[2]]);
+        $("#tiem3value4").html(datavalue[2][item[3]]);
+        $("#tiem3value5").html(datavalue[2][item[4]]);
+        $("#tiem3value6").html(datavalue[2][item[5]]);
+        $("#tiem3value7").html(datavalue[2][item[6]]);
+        $("#tiem3value8").html(datavalue[2][item[7]]);
+        $("#tiem3value9").html(datavalue[2][item[8]]);
+        $("#tiem3value10").html(datavalue[2][item[9]]);
+        $("#tiem3value11").html(datavalue[2][item[10]]);
+
+        $("#tiem4value1").html(datavalue[3][item[0]]);
+        $("#tiem4value2").html(datavalue[3][item[1]]);
+        $("#tiem4value3").html(datavalue[3][item[2]]);
+        $("#tiem4value4").html(datavalue[3][item[3]]);
+        $("#tiem4value5").html(datavalue[3][item[4]]);
+        $("#tiem4value6").html(datavalue[3][item[5]]);
+        $("#tiem4value7").html(datavalue[3][item[6]]);
+        $("#tiem4value8").html(datavalue[3][item[7]]);
+        $("#tiem4value9").html(datavalue[3][item[8]]);
+        $("#tiem4value10").html(datavalue[3][item[9]]);
+        $("#tiem4value11").html(datavalue[3][item[10]]);
+
+        $("#tiem5value1").html(datavalue[4][item[0]]);
+        $("#tiem5value2").html(datavalue[4][item[1]]);
+        $("#tiem5value3").html(datavalue[4][item[2]]);
+        $("#tiem5value4").html(datavalue[4][item[3]]);
+        $("#tiem5value5").html(datavalue[4][item[4]]);
+        $("#tiem5value6").html(datavalue[4][item[5]]);
+        $("#tiem5value7").html(datavalue[4][item[6]]);
+        $("#tiem5value8").html(datavalue[4][item[7]]);
+        $("#tiem5value9").html(datavalue[4][item[8]]);
+        $("#tiem5value10").html(datavalue[4][item[9]]);
+        $("#tiem5value11").html(datavalue[4][item[10]]);
+
+        $("#tiem6value1").html(datavalue[5][item[0]]);
+        $("#tiem6value2").html(datavalue[5][item[1]]);
+        $("#tiem6value3").html(datavalue[5][item[2]]);
+        $("#tiem6value4").html(datavalue[5][item[3]]);
+        $("#tiem6value5").html(datavalue[5][item[4]]);
+        $("#tiem6value6").html(datavalue[5][item[5]]);
+        $("#tiem6value7").html(datavalue[5][item[6]]);
+        $("#tiem6value8").html(datavalue[5][item[7]]);
+        $("#tiem6value9").html(datavalue[5][item[8]]);
+        $("#tiem6value10").html(datavalue[5][item[9]]);
+        $("#tiem6value11").html(datavalue[5][item[10]]);
+
+        $("#tiem7value1").html(datavalue[6][item[0]]);
+        $("#tiem7value2").html(datavalue[6][item[1]]);
+        $("#tiem7value3").html(datavalue[6][item[2]]);
+        $("#tiem7value4").html(datavalue[6][item[3]]);
+        $("#tiem7value5").html(datavalue[6][item[4]]);
+        $("#tiem7value6").html(datavalue[6][item[5]]);
+        $("#tiem7value7").html(datavalue[6][item[6]]);
+        $("#tiem7value8").html(datavalue[6][item[7]]);
+        $("#tiem7value9").html(datavalue[6][item[8]]);
+        $("#tiem7value10").html(datavalue[6][item[9]]);
+        $("#tiem7value11").html(datavalue[6][item[10]]);
+
+        $("#tiem8value1").html(datavalue[7][item[0]]);
+        $("#tiem8value2").html(datavalue[7][item[1]]);
+        $("#tiem8value3").html(datavalue[7][item[2]]);
+        $("#tiem8value4").html(datavalue[7][item[3]]);
+        $("#tiem8value5").html(datavalue[7][item[4]]);
+        $("#tiem8value6").html(datavalue[7][item[5]]);
+        $("#tiem8value7").html(datavalue[7][item[6]]);
+        $("#tiem8value8").html(datavalue[7][item[7]]);
+        $("#tiem8value9").html(datavalue[7][item[8]]);
+        $("#tiem8value10").html(datavalue[7][item[9]]);
+        $("#tiem8value11").html(datavalue[7][item[10]]);
+
+        $("#tiem9value1").html(datavalue[8][item[0]]);
+        $("#tiem9value2").html(datavalue[8][item[1]]);
+        $("#tiem9value3").html(datavalue[8][item[2]]);
+        $("#tiem9value4").html(datavalue[8][item[3]]);
+        $("#tiem9value5").html(datavalue[8][item[4]]);
+        $("#tiem9value6").html(datavalue[8][item[5]]);
+        $("#tiem9value7").html(datavalue[8][item[6]]);
+        $("#tiem9value8").html(datavalue[8][item[7]]);
+        $("#tiem9value9").html(datavalue[8][item[8]]);
+        $("#tiem9value10").html(datavalue[8][item[9]]);
+        $("#tiem9value11").html(datavalue[8][item[10]]);
+
+        $("#tiem10value1").html(datavalue[9][item[0]]);
+        $("#tiem10value2").html(datavalue[9][item[1]]);
+        $("#tiem10value3").html(datavalue[9][item[2]]);
+        $("#tiem10value4").html(datavalue[9][item[3]]);
+        $("#tiem10value5").html(datavalue[9][item[4]]);
+        $("#tiem10value6").html(datavalue[9][item[5]]);
+        $("#tiem10value7").html(datavalue[9][item[6]]);
+        $("#tiem10value8").html(datavalue[9][item[7]]);
+        $("#tiem10value9").html(datavalue[9][item[8]]);
+        $("#tiem10value10").html(datavalue[9][item[9]]);
+        $("#tiem10value11").html(datavalue[9][item[10]]);
+
+        $("#tiem11value1").html(datavalue[10][item[0]]);
+        $("#tiem11value2").html(datavalue[10][item[1]]);
+        $("#tiem11value3").html(datavalue[10][item[2]]);
+        $("#tiem11value4").html(datavalue[10][item[3]]);
+        $("#tiem11value5").html(datavalue[10][item[4]]);
+        $("#tiem11value6").html(datavalue[10][item[5]]);
+        $("#tiem11value7").html(datavalue[10][item[6]]);
+        $("#tiem11value8").html(datavalue[10][item[7]]);
+        $("#tiem11value9").html(datavalue[10][item[8]]);
+        $("#tiem11value10").html(datavalue[10][item[9]]);
+        $("#tiem11value11").html(datavalue[10][item[10]]);
+
+        $('#name1').html(place[0]);
+        $('#name2').html(place[1]);
+        $('#name3').html(place[2]);
+        $('#name4').html(place[3]);
+        $('#name5').html(place[4]);
+        $('#name6').html(place[5]);
+        $('#name7').html(place[6]);
+        $('#name8').html(place[7]);
+        $('#name9').html(place[8]);
+        $('#name10').html(place[9]);
+        $('#name11').html(place[10]);
+
+        $('#p1n').html(pn[0]);
+        $('#p2n').html(pn[1]);
+        $('#p3n').html(pn[2]);
+        $('#p4n').html(pn[3]);
+        $('#p5n').html(pn[4]);
+        $('#p6n').html(pn[5]);
+        $('#p7n').html(pn[6]);
+        $('#p8n').html(pn[7]);
+        $('#p9n').html(pn[8]);
+        $('#p10n').html(pn[9]);
+        $('#p11n').html(pn[10]);
+    </script>
+</body>
+
+</html>

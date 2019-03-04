@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/mustache.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bd.css" />
+</head>
+
+<body>
+    <div class="box">
+        <div id="title"><span id="city"></span>电商总览</div>
+        <div class="blank"></div>
+        <div>
+            <img class="logo" src="img/logo.jpeg" />
+            <p id="samllTitle">二、<span id="year"></span>全市网络零售不同平台交易额分布</p>
+            <div id="chart1" style=" height:500px; width:800px; margin:auto; margin-top: 80px"></div>
+
+            <div id="line"></div>
+            <div id="summary"></div>
+            <div class="page-even">
+                <span>2</span>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var city, year, summary, datavalue;
+        var keys = [],
+            values = [];
+        // ajax 请求数据  
+        $.ajax({
+            // 方式  
+            type: "GET",
+            // 是否异步  
+            async: false,
+            // 路径||API  
+            url: "./json/2.php",
+            //返回数据形式为json  
+            dataType: "json",
+            // 加载成功  
+            success: function(data) {
+                // 更新初始数据
+                city = data.city;
+                year = data.year;
+                summary = data.summary;
+                datavalue = data.datavalue;
+            },
+            // 加载错误  
+            error: function(errorMsg) {
+                // alert("请求数据失败!");  
+                console.log(errorMsg)
+            }
+        })
+
+        for (var key in datavalue) {
+            for (var newkey in datavalue[key]) {
+                keys.push(newkey);
+                values.push(datavalue[key][newkey]);
+            }
+        }
+
+        //更新DOM
+        $('#city').html(city);
+        $('#year').html(year);
+        $('#summary').html(summary);
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart1 = echarts.init(document.getElementById('chart1'));
+
+        // 指定图表的配置项和数据
+        myChart1.setOption({
+            title: {},
+            legend: {
+                x: 'center',
+                data: keys
+            },
+            calculable: true,
+            series: [{
+                name: '半径模式',
+                type: 'pie',
+                radius: ['28%', '62%'],
+                center: ['center', '45%'],
+                roseType: 'area',
+                x: '50%', // for funnel
+                max: 40, // for funnel
+                sort: 'ascending', // for funnel
+                data: [{
+                    value: values[1],
+                    name: keys[1],
+                    itemStyle: {
+                        normal: {
+                            color: '#FFA000',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true,
+                            }
+                        }
+                    }
+                }, {
+                    value: values[0],
+                    name: keys[0],
+                    itemStyle: {
+                        normal: {
+                            color: '#0277BD',
+                            label: {
+                                show: true,
+                                formatter: '{b}({d}%)'
+                            },
+                            labelLine: {
+                                show: true,
+                            }
+                        }
+                    }
+                }]
+            }]
+        })
+    </script>
+</body>
+
+</html>
